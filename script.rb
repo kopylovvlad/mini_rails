@@ -1,3 +1,7 @@
+# Code from Euruko 2021
+# Building a Ruby web app using the Ruby Standard Library (Maple Ong)
+# https://www.youtube.com/watch?v=lxczDssLYKA
+
 require 'socket'
 require 'uri'
 require 'yaml/store'

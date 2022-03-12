@@ -1,0 +1,11 @@
+source 'https://rubygems.org'
+
+ruby '3.0.1'
+
+gem 'activesupport'
+
+group :development do
+  gem 'pry'
+  gem 'solargraph'
+  gem 'rubocop'
+end
