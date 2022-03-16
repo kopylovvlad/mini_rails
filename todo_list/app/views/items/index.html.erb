@@ -11,9 +11,8 @@
             <p><%= item.title %></p>
           </div>
           <div class="col-sm-4">
-            <form action="/delete" method="post" enctype="application/x-www-form-urlencoded">
+            <form action="/items/<%= item.id %>" method="post" enctype="application/x-www-form-urlencoded">
               <input type="hidden" name="_method" value="DELETE">
-              <input type="hidden" name="id" value="<%= item.id %>">
               <button class="btn btn-danger btn-sm">Удалить пункт</button>
             </form>
           </div>

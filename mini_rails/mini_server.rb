@@ -4,12 +4,15 @@
 class MiniServer
   # NOTE: Value object
   class ClientRequest
-    attr_reader :method_token, :path, :params, :header
-    def initialize(method_token, path, params, header)
+    attr_reader :method_token, :path, :params, :header, :controller_name, :controler_method_name
+
+    def initialize(method_token, path, params, header, controller_name, controler_method_name)
       @method_token = method_token
       @path = path
       @params = params
       @header = header
+      @controller_name = controller_name
+      @controler_method_name = controler_method_name
     end
   end
 
@@ -38,7 +41,15 @@ class MiniServer
 
     puts "✅ Приняли запрос с методом #{method_token} на ручку #{path_with_params} с версией #{version_number}"
     path, _get_params = path_with_params.split('?')
-    request = ClientRequest.new(method_token, path, params, headers)
+
+    # Route's placeholder support
+    # TODO: how to catch path placeholders ?
+    selected_route = MiniActiveRouter.instance.find(method_token, path)
+    controller_name, controler_method_name = selected_route.controller_data
+    placeholders = selected_route.parse_placeholders(path)
+    params = params.merge(placeholders)
+
+    request = ClientRequest.new(method_token, path, params, headers, controller_name, controler_method_name)
 
     # Construct the HTTP request
     http_response = yield request

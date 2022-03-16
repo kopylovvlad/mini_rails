@@ -41,9 +41,11 @@ class MiniRails
         path = request.path
         params = request.params
         header = request.header
+        controller_name = request.controller_name
+        controler_method_name = request.controler_method_name
 
         # Decide what to respond
-        controller_name, method_name = MiniActiveRouter.instance.find(method_token, path)
+        # controller_name, controler_method_name = MiniActiveRouter.instance.find(method_token, path)
         controller_class_name = "#{controller_name.camelize}Controller"
         begin
           controller_class = Object.const_get controller_class_name
@@ -53,7 +55,7 @@ class MiniRails
         end
 
         controller = controller_class.new(params, header)
-        response = controller.public_send(method_name)
+        response = controller.public_send(controler_method_name)
 
         # Construct the HTTP request
         http_response = controller.render_response(response)

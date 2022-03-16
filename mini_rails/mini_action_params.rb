@@ -35,6 +35,7 @@ class MiniActionParams
     # TODO: Add support for params with brackets
     # https://stackoverflow.com/a/7946494
     post_params = URI.decode_www_form(body).to_h.transform_keys(&:to_sym)
+
     # Merge GET and POST params
     Data.new(headers, get_params.merge(post_params))
   end
