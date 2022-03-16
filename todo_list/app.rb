@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require '../core/core'
+require '../mini_rails/mini_rails'
 require 'pry'
 
 # TODO: to core. Autoload paths

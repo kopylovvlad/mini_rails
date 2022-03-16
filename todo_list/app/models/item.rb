@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Item < ActiveRecord
+class Item < MiniActiveRecord
   attribute :title, type: String
 
   class << self

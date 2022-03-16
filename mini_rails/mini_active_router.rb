@@ -2,10 +2,7 @@
 
 require 'singleton'
 
-# TODO: implement
-# MiniRails.run
-
-class ActiveRouter
+class MiniActiveRouter
   include ::Singleton
 
   def initialize

@@ -3,7 +3,7 @@
 module Layout
 
   # TODO: Move to global object
-  # @param response [ActionController::Response]
+  # @param response [MiniActionController::Response]
   def render_response(response)
     status_code = response.status
     response_message = response.response_message
@@ -36,14 +36,14 @@ module Layout
   end
 end
 
-module ActionView
+module MiniActionView
   include Layout
 
   # TODO: rewrite
-  # @return [ActionController::Response]
-  def render(view_name, status: ActionController::DEFAULT_STATUS)
+  # @return [MiniActionController::Response]
+  def render(view_name, status: MiniActionController::DEFAULT_STATUS)
     response_message = render_view("#{view_name}.html.erb")
-    ActionController::Response.new(
+    MiniActionController::Response.new(
       status: status, response_message: response_message, headers: {}
     )
   end

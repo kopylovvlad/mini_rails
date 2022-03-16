@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ActiveSupport
+module MiniActiveSupport
   # It converts all strings to symbols
   class HashWithIndifferentAccess
     def initialize(hash)

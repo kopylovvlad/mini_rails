@@ -4,7 +4,7 @@ require 'erb'
 
 # TODO: Base class
 
-class ActionController
+class MiniActionController
   module Layout
     def self.included(base)
       base.class_attribute :layout
@@ -16,7 +16,7 @@ class ActionController
   end
 
   include Layout
-  include ActionView
+  include MiniActionView
 
   class Response
     attr_reader :status, :response_message, :headers
@@ -29,7 +29,7 @@ class ActionController
 
   class Parameters
     def initialize(raw_params = {})
-      @hash = ::ActiveSupport::HashWithIndifferentAccess.new(raw_params)
+      @hash = ::MiniActiveSupport::HashWithIndifferentAccess.new(raw_params)
     end
 
     # @param key [String, Symbol]

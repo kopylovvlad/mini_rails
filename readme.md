@@ -3,7 +3,7 @@ https://gist.github.com/kopylovvlad/6727e8316db553577391ed72dca87f95
 Добавить:
 
 * Сделать вьюхи
-* ActionView from ActionController
+* Separate ActionView from ActionController
 * Markup language
 * Code-reloader
 
@@ -14,3 +14,6 @@ https://coderwall.com/p/dpre4q/how-to-reload-module-without-relaunch-rails-conso
 * Write global handler for 500 error
 * Add Rails CLI
 * Implement save! and validations
+* ActiveRecord .where + proxy
+* Роутер - это регулярочка и placeholder'ы
+* all names -> to Mini*

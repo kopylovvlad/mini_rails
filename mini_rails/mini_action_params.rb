@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ActionParams
+class MiniActionParams
   class Data
     attr_reader :headers, :params
     def initialize(headers, params)

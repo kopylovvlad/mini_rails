@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # TODO: add placeholders support in path
-ActiveRouter.instance.draw do
+MiniActiveRouter.instance.draw do
   get '/', to: 'items#index'
   post '/', to: 'items#create'
   delete '/delete', to: 'items#destroy'

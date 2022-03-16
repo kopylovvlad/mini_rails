@@ -1,9 +1,35 @@
 # frozen_string_literal: true
 
+require 'socket'
+require 'uri'
+require 'yaml/store'
+require 'securerandom'
+
+require_relative 'mini_code_loader'
+require_relative 'mini_server'
+require_relative 'mini_active_record'
+require_relative 'mini_active_support'
+require_relative 'mini_action_view'
+require_relative 'mini_action_controller'
+require_relative 'mini_action_params'
+require_relative 'mini_active_router'
+require_relative 'mini_rails'
+
+# TODO: find all rails parts
+# rails
+# zeitwerk - code loader ✅
+# activesupport
+# actionview - in progress
+# actionpack - responding to web requests
+# railties
+# activemodel
+# activerecord
+# globalid
+
 class MiniRails
   def self.run
-    code_loader = CodeLoader.new
-    server = MyServer.new
+    code_loader = MiniCodeLoader.new
+    server = MiniServer.new
 
     # TODO: multy tread
     loop do
@@ -17,7 +43,7 @@ class MiniRails
         header = request.header
 
         # Decide what to respond
-        controller_name, method_name = ActiveRouter.instance.find(method_token, path)
+        controller_name, method_name = MiniActiveRouter.instance.find(method_token, path)
         controller_class_name = "#{controller_name.camelize}Controller"
         begin
           controller_class = Object.const_get controller_class_name

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Base. Rack layer: START
-class MyServer
+class MiniServer
   # NOTE: Value object
   class ClientRequest
     attr_reader :method_token, :path, :params, :header
@@ -27,7 +27,7 @@ class MyServer
     request_line = client.readline
     method_token, path_with_params, version_number = request_line.split
     # fetch params from a request
-    action_params = ::ActionParams.parse(client, path_with_params)
+    action_params = ::MiniActionParams.parse(client, path_with_params)
     params = action_params.params
     headers = action_params.headers
 

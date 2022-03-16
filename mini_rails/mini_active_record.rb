@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'active_support'
+require_relative 'mini_active_support'
 
 # TODO: divide code by responsibilities
 # TODO: create yml-driver object
-class ActiveRecord
+class MiniActiveRecord
   module ClassMethods
     def table_name
       "#{name.downcase}s"
