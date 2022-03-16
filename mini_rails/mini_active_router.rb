@@ -3,11 +3,43 @@
 require 'singleton'
 
 class MiniActiveRouter
+  class Route
+    attr_reader :method, :path
+
+    # @param method [String] GET, POST, PATCH, PUT, DELETE
+    # @param path [String, Regexp]
+    # @param to [String] Name of controller and method ex: 'items#index'
+    def initialize(method, path, to:)
+      @method = method
+      @path = path
+      @to = to
+    end
+
+    # @param input_method [String]
+    # @param input_path [String]
+    def match?(input_method, input_path)
+      return false if input_method != @method
+
+      if @path.is_a?(String)
+        input_path == @path
+      elsif @path.is_a?(Regexp)
+        input_path =~ @path
+      else
+        raise 'ERROR: undefined path'
+      end
+    end
+
+    # @return [String]
+    def location
+      @to
+    end
+  end
+
   include ::Singleton
 
   def initialize
-    @map = {}
-    @fallback = nil
+    @map = []
+    @fallback_route = nil
   end
 
   def draw(&block)
@@ -35,21 +67,23 @@ class MiniActiveRouter
   end
 
   def not_found(to: )
-    @fallback = to
+    @fallback_route = to
   end
 
   def find(method, path)
-    key = [method, path].join('_')
-    location = @map[key] || @fallback
-    raise "Can't find route for #{method}##{path}" if location.nil?
-
-    location.split('#')
+    selected_route = @map.find{ |route| route.match?(method, path) }
+    if !selected_route.nil?
+      selected_route.location.split('#')
+    elsif !@fallback_route.nil?
+      @fallback_route.split('#')
+    else
+      raise "Can't find route for #{method}##{path}"
+    end
   end
 
   private
 
   def write_to_map(method, path, to:)
-    key = [method, path].join('_')
-    @map[key] = to
+    @map << Route.new(method, path, to: to)
   end
 end

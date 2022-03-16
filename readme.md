@@ -16,4 +16,4 @@ https://coderwall.com/p/dpre4q/how-to-reload-module-without-relaunch-rails-conso
 * Implement save! and validations
 * ActiveRecord .where + proxy
 * Роутер - это регулярочка и placeholder'ы
-* all names -> to Mini*
+* Выложить парням с пометкой PS ищу работу!
