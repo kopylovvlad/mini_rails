@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Base. Code loading layer. START
+# TODO: include the class
 class MiniCodeLoader
   def initialize
     @typestamp = File.mtime(__FILE__)
@@ -23,4 +23,3 @@ end
 def reload!
   CodeLoader.reload!
 end
-# Base. Code loading layer. END

@@ -18,6 +18,7 @@ module MiniActionController
     # @param status [String]
     # @return [MiniActionController::Response]
     def render(view_name, status: MiniActionController::DEFAULT_STATUS)
+      # collect and forward instance variable to MiniActionView::Base
       variables = instance_variables.reduce({}) do |memo, var_symbol|
         memo[var_symbol] = instance_variable_get(var_symbol)
         memo

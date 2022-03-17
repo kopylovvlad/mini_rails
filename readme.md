@@ -2,8 +2,6 @@ https://gist.github.com/kopylovvlad/6727e8316db553577391ed72dca87f95
 
 Добавить:
 
-* Сделать вьюхи
-* Separate ActionView from ActionController
 * Markup language
 * Code-reloader
 
@@ -15,7 +13,5 @@ https://coderwall.com/p/dpre4q/how-to-reload-module-without-relaunch-rails-conso
 * Add Rails CLI
 * Implement save! and validations
 * ActiveRecord .where + proxy
-* Роутер - это регулярочка и placeholder'ы
 * Выложить парням с пометкой PS ищу работу!
 * Add json responses and Serializers
-* Create class ::BASE and rewrite all classes to modules
