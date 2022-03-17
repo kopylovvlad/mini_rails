@@ -17,3 +17,5 @@ https://coderwall.com/p/dpre4q/how-to-reload-module-without-relaunch-rails-conso
 * ActiveRecord .where + proxy
 * Роутер - это регулярочка и placeholder'ы
 * Выложить парням с пометкой PS ищу работу!
+* Add json responses and Serializers
+* Create class ::BASE and rewrite all classes to modules

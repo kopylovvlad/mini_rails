@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
-module Layout
-
+# TODO: to class
+class LayoutView
   # TODO: Move to global object
+  # TODO: yard
   # @param response [MiniActionController::Response]
-  def render_response(response)
+  def render_response(layout, response)
     status_code = response.status
     response_message = response.response_message
     additional_headers = response.headers.map{ |k,v| "#{k}: #{v}" }.join("\n\r")
@@ -14,14 +15,14 @@ module Layout
       Content-Type: text/html
       #{additional_headers}
 
-      #{render_layout { response_message }}
+      #{render_layout(layout) { response_message }}
     MSG
   end
 
   private
 
   # TODO: Move to LayoutsController
-  def render_layout
+  def render_layout(layout)
     entity = 'layouts'
     # layout_name = 'application' # we can set it in class
     layout_name = layout
@@ -36,10 +37,24 @@ module Layout
   end
 end
 
-module MiniActionView
-  include Layout
+# NOTE: Try not to use instance variables in the class
+# besause MiniActionView is separated from MiniActionController
+class MiniActionView
+  class_attribute :entity
+  entity = nil
 
-  # TODO: rewrite
+  # @params variables [Hash<Symbol, Object>]
+  # @params layout [String, Symbol]
+  # @params entity [String, Symbol]
+  def initialize(variables, entity)
+    variables.each do |key, value|
+      instance_variable_set(key, value)
+    end
+    self.entity = entity
+  end
+
+  # @param view_name [String, Symbol]
+  # @param status [String]
   # @return [MiniActionController::Response]
   def render(view_name, status: MiniActionController::DEFAULT_STATUS)
     response_message = render_view("#{view_name}.html.erb")

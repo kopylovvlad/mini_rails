@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-# TODO: add edit route
+# TODO: Add edit route
+# TODO: Add controller module support ex: to: 'api/items#index'
 MiniActiveRouter.instance.draw do
   get '/', to: 'items#index'
   post '/items', to: 'items#create'

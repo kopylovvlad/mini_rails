@@ -3,20 +3,34 @@
 require 'erb'
 
 # TODO: Base class
-
+# TODO: Add json response
 class MiniActionController
-  module Layout
+  module Renders
     def self.included(base)
       base.class_attribute :layout
       base.layout = :application
+
+      # NOTE: In order to set layout write
+      # set_layout :<LayoutName>
       base.define_singleton_method(:set_layout) do |layout_name|
         self.layout = layout_name
       end
     end
+
+    # NOTE: MiniActionView is separated from MiniActionController
+    # @param view_name [String, Symbol]
+    # @param status [String]
+    # @return [MiniActionController::Response]
+    def render(view_name, status: MiniActionController::DEFAULT_STATUS)
+      variables = instance_variables.reduce({}) do |memo, var_symbol|
+        memo[var_symbol] = instance_variable_get(var_symbol)
+        memo
+      end
+      MiniActionView.new(variables, entity).render(view_name, status: status)
+    end
   end
 
-  include Layout
-  include MiniActionView
+  include Renders
 
   class Response
     attr_reader :status, :response_message, :headers
@@ -61,6 +75,10 @@ class MiniActionController
     end
   end
 
+  # TODO: Add status matcher ex:
+  # status: :ok
+  # status: 201
+  # status: "200 OK"
   DEFAULT_STATUS = "200 OK"
   SEE_OTHER = "303 See Other"
 
