@@ -2,7 +2,8 @@
 
 # TODO: Add edit route
 # TODO: Add controller module support ex: to: 'api/items#index'
-MiniActiveRouter.instance.draw do
+# TODO: Replace MiniActiveRouter::Base to MiniRails.config
+MiniActiveRouter::Base.instance.draw do
   get '/', to: 'items#index'
   post '/items', to: 'items#create'
   delete '/items/:id', to: 'items#destroy'

@@ -44,7 +44,7 @@ class MiniServer
 
     # Route's placeholder support
     # TODO: how to catch path placeholders ?
-    selected_route = MiniActiveRouter.instance.find(method_token, path)
+    selected_route = MiniActiveRouter::Base.instance.find(method_token, path)
     controller_name, controler_method_name = selected_route.controller_data
     placeholders = selected_route.parse_placeholders(path)
     params = params.merge(placeholders)

@@ -2,6 +2,7 @@
 
 # By ABC
 require 'securerandom'
+require 'singleton'
 require 'socket'
 require 'uri'
 require 'yaml/store'
@@ -50,7 +51,6 @@ class MiniRails
         controler_method_name = request.controler_method_name
 
         # Decide what to respond
-        # controller_name, controler_method_name = MiniActiveRouter.instance.find(method_token, path)
         controller_class_name = "#{controller_name.camelize}Controller"
         begin
           controller_class = Object.const_get controller_class_name
