@@ -22,7 +22,7 @@ module MiniActionController
         memo[var_symbol] = instance_variable_get(var_symbol)
         memo
       end
-      MiniActionView.new(variables, entity).render(view_name, status: status)
+      MiniActionView::Base.new(variables, entity).render(view_name, status: status)
     end
   end
 end

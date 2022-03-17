@@ -64,7 +64,7 @@ class MiniRails
 
         # Construct the HTTP request
         # http_response = controller.render_response(response)
-        http_response = LayoutView.new.render_response(controller.layout, response)
+        http_response = MiniActionView::Layout.new.render_response(controller.layout, response)
         http_response
       end
     end
