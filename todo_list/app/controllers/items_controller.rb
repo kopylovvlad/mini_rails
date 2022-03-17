@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ItemsController < MiniActionController
+class ItemsController < MiniActionController::Base
   def index
     @items = Item.all
     render :index

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'erb'
+
 # TODO: to class
 class LayoutView
   # TODO: Move to global object

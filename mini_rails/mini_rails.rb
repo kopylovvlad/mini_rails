@@ -1,18 +1,23 @@
 # frozen_string_literal: true
 
+# By ABC
+require 'securerandom'
 require 'socket'
 require 'uri'
 require 'yaml/store'
-require 'securerandom'
 
-require_relative 'mini_code_loader'
-require_relative 'mini_server'
-require_relative 'mini_active_record'
 require_relative 'mini_active_support'
-require_relative 'mini_action_view'
+
+# By ABC
 require_relative 'mini_action_controller'
 require_relative 'mini_action_params'
+require_relative 'mini_action_view'
+require_relative 'mini_active_record'
 require_relative 'mini_active_router'
+require_relative 'mini_code_loader'
+require_relative 'mini_rails'
+require_relative 'mini_server'
+
 require_relative 'mini_rails'
 
 # TODO: find all rails parts
