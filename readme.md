@@ -7,7 +7,6 @@ https://guides.rubyonrails.org/routing.html
 Добавить:
 
 * Markup language
-* Caching view in prod env
 * yard
 * Write global handler for 500 error
 * Add Rails CLI

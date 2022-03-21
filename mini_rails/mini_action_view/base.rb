@@ -4,6 +4,8 @@ module MiniActionView
   # NOTE: Try not to use instance variables in the class
   # because MiniActionView is separated from MiniActionController
   class Base
+    include ::MiniActionView::Reader
+
     class_attribute :entity
     entity = nil
 
@@ -35,11 +37,9 @@ module MiniActionView
     private
 
     def render_view(view_name)
-      current_path = Dir.pwd
-      view_path = File.join(current_path, 'app', 'views', entity, view_name.to_s)
-      raise "Error: Can't find view #{view_path}" unless File.exist?(view_path)
+      view_path = MiniRails.root.join('app', 'views', entity, view_name.to_s).to_s
 
-      ERB.new(File.open(view_path).read).result(binding)
+      ERB.new(read_or_open(view_path)).result(binding)
     end
   end
 end

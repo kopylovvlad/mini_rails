@@ -2,6 +2,8 @@
 
 module MiniActionView
   class Layout
+    include ::MiniActionView::Reader
+
     # TODO: yard
     # @param response [MiniActionController::Response]
     def render_response(layout, response)
@@ -26,12 +28,8 @@ module MiniActionView
       layout_name = layout
       view_name = "#{layout_name}.html.erb"
 
-      # TODO: DRY
-      current_path = Dir.pwd
-      view_path = File.join(current_path, 'app', 'views', entity, view_name)
-      raise "Error: Can't find view #{view_path}" unless File.exist?(view_path)
-
-      ERB.new(File.open(view_path).read).result(binding)
+      view_path = MiniRails.root.join('app', 'views', entity, view_name).to_s
+      ERB.new(read_or_open(view_path)).result(binding)
     end
   end
 end

@@ -21,7 +21,8 @@ class MiniServer
   def initialize
     @port = ENV['PORT'] || 9999
     @server = TCPServer.new(@port)
-    puts "✅ Вебсервер готов, товарищь. Теперь открой в браузере http://localhost:#{@port}/"
+    puts "✅ Вебсервер готов работать в #{MiniRails.env} окружении, товарищь."
+    puts "Теперь открой в браузере http://localhost:#{@port}/"
   end
 
   def fetch_data
