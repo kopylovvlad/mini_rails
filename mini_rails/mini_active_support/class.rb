@@ -2,6 +2,7 @@
 
 module MiniActiveSupport
   module Class
+    # TODO: rewrite with pure ruby script
     # https://apidock.com/rails/Class/class_attribute
     def class_attribute(*attrs, instance_accessor: true,
       instance_reader: instance_accessor, instance_writer: instance_accessor, instance_predicate: true, default: nil)
@@ -48,6 +49,16 @@ module MiniActiveSupport
       class_eval(["class << self", *class_methods, "end", *methods].join(";").tr("\n", ";"), location.path, location.lineno)
 
       attrs.each { |name| public_send("#{name}=", default) }
+    end
+
+    # https://apidock.com/rails/v5.2.3/Class/descendants
+    def descendants
+      descendants = []
+      ObjectSpace.each_object(singleton_class) do |k|
+        next if k.singleton_class?
+        descendants.unshift k unless k == self
+      end
+      descendants
     end
   end
 end

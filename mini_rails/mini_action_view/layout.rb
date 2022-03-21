@@ -20,7 +20,6 @@ module MiniActionView
 
     private
 
-    # TODO: Move to LayoutsController
     def render_layout(layout)
       entity = 'layouts'
       # layout_name = 'application' # we can set it in class
