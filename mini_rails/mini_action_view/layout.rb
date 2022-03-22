@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+# QUESTION: Maybe inherite it from BASE? Layout and LayoutView
 module MiniActionView
   class Layout
     include ::MiniActionView::Reader
+    include ::MiniActionView::Render
 
     # TODO: yard
     # @param response [MiniActionController::Response]
@@ -22,8 +24,11 @@ module MiniActionView
 
     private
 
+    def entity
+      'layouts'
+    end
+
     def render_layout(layout)
-      entity = 'layouts'
       # layout_name = 'application' # we can set it in class
       layout_name = layout
       view_name = "#{layout_name}.html.erb"

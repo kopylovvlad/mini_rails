@@ -1,25 +1,29 @@
-<h1> Мой список дел! </h1>
-
 <%= render_partial :new_item_form %>
 
-<ul class="list-group">
-  <% if @items.size > 0 %>
-    <% @items.each do |item| %>
-      <li class="list-group-item">
-        <div class="row">
-          <div class="col-sm-8">
-            <p><%= item.title %></p>
-          </div>
-          <div class="col-sm-4">
-            <form action="/items/<%= item.id %>" method="post" enctype="application/x-www-form-urlencoded">
-              <input type="hidden" name="_method" value="DELETE">
-              <button class="btn btn-danger btn-sm">Удалить пункт</button>
-            </form>
-          </div>
-        </div>
-      </li>
-    <% end %>
-  <% else %>
-    <li class="list-group-item">Данных нет. Пожалуйста добавьте данные на сегодня</li>
-  <% end %>
-</ul>
+<div class="row">
+  <div class="col">
+    <ul class="list-group">
+      <% if @items.size > 0 %>
+        <% @items.each do |item| %>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-sm-8">
+                <p><%= item.title %></p>
+              </div>
+              <div class="col-sm-4">
+                <form action="/items/<%= item.id %>" method="post" enctype="application/x-www-form-urlencoded">
+                  <input type="hidden" name="_method" value="DELETE">
+                  <button class="btn btn-danger btn-sm">Удалить пункт</button>
+                </form>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      <% else %>
+        <li class="list-group-item">Данных нет. Пожалуйста добавьте данные на сегодня</li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col">
+  </div>
+</div>

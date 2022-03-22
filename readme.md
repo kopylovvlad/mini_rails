@@ -6,6 +6,7 @@ https://guides.rubyonrails.org/routing.html
 
 Добавить:
 
+* Оформить приложение
 * Markup language
 * yard
 * Write global handler for 500 error

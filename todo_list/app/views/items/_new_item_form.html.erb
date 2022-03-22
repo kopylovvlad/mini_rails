@@ -1,8 +1,15 @@
-<form action="/items" method="post" enctype="application/x-www-form-urlencoded" class="mb-3">
-  <div class="form-group">
-    <label for="item_name_main">Добавь план на день</label>
-    <!--  How to wrapper params ? -->
-    <input type="text" class="form-control" id="item_name_main" name="title" placeholder="Писать сюда...">
+<div class="row">
+  <div class="col">
+    <form action="/items" method="post" enctype="application/x-www-form-urlencoded">
+      <div class="mb-1">
+        <label for="item_name_main">Добавь план на день</label>
+        <input type="text" class="form-control" id="item_name_main" name="title" placeholder="Писать сюда...">
+      </div>
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary btn-sm">Добавить</button>
+      </div>
+    </form>
   </div>
-  <button type="submit" class="btn btn-primary btn-sm">Добавить</button>
-</form>
+  <div class="col">
+  </div>
+</div>
