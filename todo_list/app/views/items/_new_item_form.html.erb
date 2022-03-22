@@ -1,6 +1,6 @@
-<div class="row">
+<div class="row mb-3">
   <div class="col">
-    <form action="/items" method="post" enctype="application/x-www-form-urlencoded">
+    <form action="/groups/<%= @group.id %>/items" method="post" enctype="application/x-www-form-urlencoded">
       <div class="mb-1">
         <label for="item_name_main">Добавь план на день</label>
         <input type="text" class="form-control" id="item_name_main" name="title" placeholder="Писать сюда...">

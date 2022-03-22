@@ -50,6 +50,7 @@ class MiniServer
     placeholders = selected_route.parse_placeholders(path)
     params = params.merge(placeholders)
 
+    puts "Его обработает #{controller_name.camelize}##{controler_method_name} ..."
     request = ClientRequest.new(method_token, path, params, headers, controller_name, controler_method_name)
 
     # Construct the HTTP request

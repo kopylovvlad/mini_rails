@@ -1,3 +1,14 @@
+<div class="row mb-5">
+  <div class="col-sm-6">
+    <h3>Лист: <%= @group.title %></h3>
+    <small>Описание: <%= @group.description %></small>
+    <form action="/groups/<%= @group.id %>" method="post" enctype="application/x-www-form-urlencoded" class="mt-2">
+      <input type="hidden" name="_method" value="DELETE">
+      <button class="btn btn-danger btn-sm">удалить список</button>
+    </form>
+  </div>
+</div>
+
 <%= render_partial :new_item_form %>
 
 <div class="row">
@@ -11,7 +22,7 @@
                 <p><%= item.title %></p>
               </div>
               <div class="col-sm-4">
-                <form action="/items/<%= item.id %>" method="post" enctype="application/x-www-form-urlencoded">
+                <form action="/groups/<%= @group.id %>/items/<%= item.id %>" method="post" enctype="application/x-www-form-urlencoded">
                   <input type="hidden" name="_method" value="DELETE">
                   <button class="btn btn-danger btn-sm">Удалить пункт</button>
                 </form>
@@ -20,7 +31,7 @@
           </li>
         <% end %>
       <% else %>
-        <li class="list-group-item">Данных нет. Пожалуйста добавьте данные на сегодня</li>
+        <li class="list-group-item">Данных нет. Пожалуйста добавьте данные в лист</li>
       <% end %>
     </ul>
   </div>

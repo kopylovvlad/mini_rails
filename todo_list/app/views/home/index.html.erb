@@ -1,0 +1,53 @@
+<h2>Hello world!</h2>
+
+<!-- new group form -->
+<div class="row">
+  <div class="col">
+    <h3>Создать новый список</h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <form action="/groups" method="post" enctype="application/x-www-form-urlencoded">
+      <div class="mb-1">
+        <label for="group_name_main">Заголовок</label>
+        <input type="text" class="form-control" id="group_name_main" name="title" placeholder="Писать сюда...">
+      </div>
+      <div class="mb-1">
+        <label for="group_descr_main">Описание</label>
+        <input type="text" class="form-control" id="group_descr_main" name="description" placeholder="Писать сюда...">
+      </div>
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary btn-sm">Создать</button>
+      </div>
+    </form>
+  </div>
+  <div class="col">
+  </div>
+</div>
+
+<!-- all groups -->
+<div class="row">
+  <div class="col">
+    <h3>Ваши списки дел</h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="list-group">
+      <% if @groups.size > 0 %>
+        <% @groups.each do |group| %>
+          <a href="/groups/<%= group.id %>/items" class="list-group-item list-group-item-action">
+            <%= group.title %>
+          </a>
+        <% end %>
+      <% else %>
+        <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+          У вас нет список задач
+        </a>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class NotFoundController < MiniActionController::Base
+class NotFoundController < ApplicationController
   def index
     render :index, status: "404 Not Found"
   end

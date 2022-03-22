@@ -35,7 +35,7 @@ class MiniCodeLoader
       file_name = autoload_paths.reduce(file_path) do |file_path, path|
         file_path.gsub(MiniRails.root.join("#{path}/").to_s, '')
       end
-      self.delete_const(file_name)
+      self.class.delete_const(file_name)
       load(file_path)
     end
     true

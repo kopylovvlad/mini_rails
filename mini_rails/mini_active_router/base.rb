@@ -69,22 +69,18 @@ module MiniActiveRouter
       if path.is_a?(Regexp)
         return path
       elsif path.is_a?(String)
-        # 'group/:group_id/items/:id/delete'.scan(/\/group\/(?<group_id>[0-9]*)\/items\/(?<id>[0-9]*)\/delete/)
         # 1: Find all placeholders
-        placeholders = path.scan(/:[0-9a-zA-Z-]*/)
+        placeholders = path.scan(/:[0-9a-zA-Z\-_]*/)
         if placeholders.size == 0
           return path
         else
-          # 'groups/:group_id/items/:id/delete'.scan(/:[0-9a-zA-Z]*/)
-          # [":group", ":id"]
-
           # 2: Replace it to (?<placeholder_name>[0-9a-zA-Z]*)
           placeholders.each do |placeholder|
-            path = path.gsub(placeholder, "(?<#{placeholder}>[0-9a-zA-Z-]*)")
+            path = path.gsub(placeholder, "(?<#{placeholder}>[0-9a-zA-Z\\-_]*)")
           end
 
-          # 3: Save route as an regexp
-          return Regexp.new(path)
+          # 3: Save the route as an regexp
+          return Regexp.new("^#{path}$")
         end
       else
         raise 'ERROR: Route path must be String or Regexp'

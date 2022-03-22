@@ -4,6 +4,8 @@ https://rubyapi.org/3.1/o/module#method-i-module_exec
 https://apidock.com/rails/Class/class_attribute
 https://guides.rubyonrails.org/routing.html
 
+Proof of Work version
+
 Добавить:
 
 * Оформить приложение
