@@ -7,9 +7,13 @@
 MiniActiveRouter::Base.instance.draw do
   get '/', to: 'home#index'
 
-  # Group scope
+  # Group scope - HTML
   post '/groups', to: 'groups#create'
   delete '/groups/:id', to: 'groups#destroy'
+
+  # Group scope - JSON
+  get '/api/groups', to: 'api/groups#index'
+  get '/api/groups/:id', to: 'api/groups#show'
 
   # Items scope
   get '/groups/:group_id/items', to: 'items#index'

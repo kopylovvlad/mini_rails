@@ -11,14 +11,9 @@ module MiniActionView
     # @param content_type [String] html by default
     # @return [MiniActionController::Response]
     def render(status: MiniActionController::DEFAULT_STATUS, content_type: 'json')
-      # TODO: rewrite
       response_message = case @object
-                         when Array, Hash
-                          JSON.dump(@object)
-                         when String
-                           @object
-                         else
-                          JSON.dump(@object.as_json)
+                         when String then @object
+                         else @object.to_json
                          end
       MiniActionController::Response.new(
         status: status, response_message: response_message, content_type: content_type, headers: {},

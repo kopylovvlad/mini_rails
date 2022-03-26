@@ -8,7 +8,7 @@ Proof of Work version
 
 Добавить:
 
-* Оформить приложение
+* Fix '/' in end path error
 * Markup language
 * yard
 * Write global handler for 500 error

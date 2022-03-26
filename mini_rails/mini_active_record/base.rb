@@ -13,5 +13,19 @@ module MiniActiveRecord
         public_send("#{key}=", value)
       end
     end
+
+    # @return [Hash<String, Object>]
+    def as_json
+      available_fields.reduce({}) do |memo, field|
+        field_name = field[:name]
+        memo[field_name.to_s] = (public_send(field_name) || field[:default])
+        memo
+      end
+    end
+
+    # @return [String]
+    def to_json
+      JSON.dump(as_json)
+    end
   end
 end

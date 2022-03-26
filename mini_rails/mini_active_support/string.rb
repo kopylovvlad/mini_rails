@@ -26,6 +26,16 @@ module MiniActiveSupport
       word.downcase!
       word
     end
+
+    # @return [String]
+    def as_json
+      self
+    end
+
+    # @return [String]
+    def to_json
+      self
+    end
   end
 end
 

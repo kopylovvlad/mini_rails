@@ -9,7 +9,7 @@ class MiniCodeLoader
 
     # Get file list and collect file data with updated time
     @application.config.autoload_paths.each do |path|
-      Dir[MiniRails.root.join("#{path}/*.rb")].each do |file_path|
+      Dir[MiniRails.root.join("#{path}/**/*.rb")].each do |file_path|
         @typestamps[file_path] = File.mtime(file_path)
       end
     end
