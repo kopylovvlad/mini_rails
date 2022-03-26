@@ -14,6 +14,6 @@ Proof of Work version
 * Write global handler for 500 error
 * Add Rails CLI
 * Implement save! and validations
-* ActiveRecord .where + proxy
+* ActiveRecord add proxy
 * Выложить парням с пометкой PS ищу работу!
 * Add json responses and Serializers

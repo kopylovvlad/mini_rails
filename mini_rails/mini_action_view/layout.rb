@@ -1,12 +1,9 @@
 # frozen_string_literal: true
 
-# QUESTION: Maybe inherite it from BASE? Layout and LayoutView
+# TODO: yard
 module MiniActionView
-  class Layout
-    include ::MiniActionView::Reader
-    include ::MiniActionView::Render
+  class Layout < ::MiniActionView::Base
 
-    # TODO: yard
     # @param response [MiniActionController::Response]
     def render_response(layout, response)
       status_code = response.status
@@ -24,16 +21,9 @@ module MiniActionView
 
     private
 
-    def entity
-      'layouts'
-    end
-
-    def render_layout(layout)
-      # layout_name = 'application' # we can set it in class
-      layout_name = layout
+    def render_layout(layout_name)
       view_name = "#{layout_name}.html.erb"
-
-      view_path = MiniRails.root.join('app', 'views', entity, view_name).to_s
+      view_path = MiniRails.root.join('app', 'views', self.entity, view_name).to_s
       ERB.new(read_or_open(view_path)).result(binding)
     end
   end

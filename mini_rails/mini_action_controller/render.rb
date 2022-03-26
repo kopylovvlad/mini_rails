@@ -19,11 +19,22 @@ module MiniActionController
     # @return [MiniActionController::Response]
     def render(view_name, status: MiniActionController::DEFAULT_STATUS)
       # collect and forward instance variable to MiniActionView::Base
-      variables = instance_variables.reduce({}) do |memo, var_symbol|
+      variables_to_pass = collect_variables
+      MiniActionView::Base.new(variables_to_pass, entity).render(view_name, status: status)
+    end
+
+    def render_layout(response)
+      variables_to_pass = collect_variables
+      MiniActionView::Layout.new(variables_to_pass, 'layouts').render_response(self.layout, response)
+    end
+
+    private
+
+    def collect_variables
+      instance_variables.reduce({}) do |memo, var_symbol|
         memo[var_symbol] = instance_variable_get(var_symbol)
         memo
       end
-      MiniActionView::Base.new(variables, entity).render(view_name, status: status)
     end
   end
 end
