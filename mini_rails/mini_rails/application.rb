@@ -44,9 +44,8 @@ module MiniRails
           end
 
           controller = controller_class.new(params, header)
-          response = controller.public_send(controler_method_name)
-          # Construct the HTTP request
-          http_response = controller.render_layout(response)
+          # Construct the HTTP response
+          http_response = controller.build_response(controler_method_name)
           http_response
         end
       end

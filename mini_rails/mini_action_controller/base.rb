@@ -9,6 +9,12 @@ module MiniActionController
       @headers = headers
     end
 
+    # @param controler_method_name [String, Symbol]
+    def build_response(controler_method_name)
+      response = public_send(controler_method_name)
+      render_layout(response)
+    end
+
     private
 
     attr_reader :params
@@ -22,7 +28,8 @@ module MiniActionController
       response_headers = {}
       response_headers['Location'] = path
       Response.new(
-        status: status, response_message: no_body, headers: response_headers
+        status: status, response_message: no_body,
+        content_type: 'html', headers: response_headers
       )
     end
 

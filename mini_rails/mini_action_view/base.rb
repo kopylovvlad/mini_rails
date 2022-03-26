@@ -22,11 +22,12 @@ module MiniActionView
 
     # @param view_name [String, Symbol]
     # @param status [String]
+    # @param content_type [String] html by default
     # @return [MiniActionController::Response]
-    def render(view_name, status: MiniActionController::DEFAULT_STATUS)
+    def render(view_name, status: MiniActionController::DEFAULT_STATUS, content_type: 'html')
       response_message = render_view("#{view_name}.html.erb")
       MiniActionController::Response.new(
-        status: status, response_message: response_message, headers: {}
+        status: status, response_message: response_message, content_type: content_type, headers: {},
       )
     end
   end

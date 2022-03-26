@@ -23,9 +23,25 @@ module MiniActionController
       MiniActionView::Base.new(variables_to_pass, entity).render(view_name, status: status)
     end
 
+    # @param object [String, Hash, Object]
+    # Object should respond to .as_json and return Hash
+    # @param status [String]
+    # @return [MiniActionController::Response]
+    def render_json(object, status: MiniActionController::DEFAULT_STATUS)
+      MiniActionView::Json.new(object).render(status: status, content_type: 'json')
+    end
+
+    # @param response [MiniActionController::Response]
     def render_layout(response)
-      variables_to_pass = collect_variables
-      MiniActionView::Layout.new(variables_to_pass, 'layouts').render_response(self.layout, response)
+      case response.content_type
+      when 'html'
+        variables_to_pass = collect_variables
+        MiniActionView::Layout.new(variables_to_pass, 'layouts').render_response(self.layout, response)
+      when 'json'
+        MiniActionView::JsonLayout.new.render_response(response)
+      else
+        raise "ERROR: Undefined content_type '#{response.content_type}'"
+      end
     end
 
     private
