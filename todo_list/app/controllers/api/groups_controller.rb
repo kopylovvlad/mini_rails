@@ -3,6 +3,7 @@
 module Api
   # TODO: Add 404 handler
   class GroupsController < ApplicationController
+    # TODO: user serializer with items
     def index
       groups = Group.all
       render_json groups

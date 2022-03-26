@@ -8,7 +8,9 @@ Proof of Work version
 
 Добавить:
 
+* Write rescue_from for controller
 * Fix '/' in end path error
+* Implement serializer
 * Markup language
 * yard
 * Write global handler for 500 error
