@@ -9,6 +9,15 @@ module MiniRails
     def initialize
       @static_paths = ['config']
       @autoload_paths = ['app/models', 'app/controllers']
+      @@driver = :yaml
+    end
+
+    def driver
+      @@driver
+    end
+
+    def driver=(value)
+      @@driver = value
     end
 
     def static_paths=(string)
