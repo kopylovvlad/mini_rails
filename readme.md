@@ -10,7 +10,6 @@ Proof of Work version
 
 * Write rescue_from for controller
 * Fix '/' in end path error
-* Implement serializer
 * Markup language
 * yard
 * Write global handler for 500 error
@@ -18,4 +17,4 @@ Proof of Work version
 * Implement save! and validations
 * ActiveRecord add proxy
 * Выложить парням с пометкой PS ищу работу!
-* Add json responses and Serializers
+* Implement rspec

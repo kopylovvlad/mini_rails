@@ -23,12 +23,25 @@ module MiniActionController
       MiniActionView::Base.new(variables_to_pass, entity).render(view_name, status: status)
     end
 
+    # Examples of usage:
+    # String: render_json({a: 123}.to_json)
+    # Array: render_json([1,2,3])
+    # Array with root: render_json([1,2,3], root: 'data')
+    # Object. render_json(Item.all)
+    # With serializer: render_json(Item.first, serializer: ItemSerializer)
+    # With each_serializer: render_json(Item.all, each_serializer: ItemSerializer)
+    #
     # @param object [String, Hash, Object]
     # Object should respond to .as_json and return Hash
-    # @param status [String]
+    # @param opts [Hash]
+    # @option opts [String] :status Http status
+    # @option opts [Object] :serializer child of MiniActiveRecord::Serializer
+    # @option opts [Object] :each_serializer Param object should be Array
+    # @option opts [String] :root
     # @return [MiniActionController::Response]
-    def render_json(object, status: MiniActionController::DEFAULT_STATUS)
-      MiniActionView::Json.new(object).render(status: status, content_type: 'json')
+    def render_json(object, opts = {})
+      status = opts[:status] = MiniActionController::DEFAULT_STATUS
+      MiniActionView::Json.new(object).render(opts.merge(status: status))
     end
 
     # @param response [MiniActionController::Response]

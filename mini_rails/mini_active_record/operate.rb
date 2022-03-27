@@ -11,6 +11,7 @@ module MiniActiveRecord
       self.class.delete_by_id(id)
     end
 
+    # TODO: add created_at
     def save
       @id ||= SecureRandom.uuid
       json = {}

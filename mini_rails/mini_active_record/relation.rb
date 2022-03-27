@@ -26,6 +26,16 @@ module MiniActiveRecord
       raw_data.map { |data| new(data) }
     end
 
+    def first
+      raw_data = driver.all(self.table_name)[0]
+      new(raw_data)
+    end
+
+    def last
+      raw_data = driver.all(self.table_name)[-1]
+      new(raw_data)
+    end
+
     def find(selected_id)
       raw_data = driver.find(selected_id, table_name)
       new(raw_data)
