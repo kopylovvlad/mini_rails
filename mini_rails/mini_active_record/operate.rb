@@ -11,9 +11,9 @@ module MiniActiveRecord
       self.class.delete_by_id(id)
     end
 
-    # TODO: add created_at
     def save
       @id ||= SecureRandom.uuid
+      @created_at ||= DateTime.now
       json = {}
       available_fields.each do |field|
         json[field[:name]] = public_send(field[:name])

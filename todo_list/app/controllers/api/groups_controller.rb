@@ -10,7 +10,7 @@ module Api
 
     def show
       group = Group.find(params[:id])
-      render_json group
+      render_json(group, serializer: GroupSerializer)
     end
   end
 end

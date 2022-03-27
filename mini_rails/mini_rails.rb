@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 # By ABC
+require 'date'
 require 'json'
 require 'securerandom'
 require 'singleton'

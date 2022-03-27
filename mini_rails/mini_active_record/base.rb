@@ -18,7 +18,7 @@ module MiniActiveRecord
     def as_json
       available_fields.reduce({}) do |memo, field|
         field_name = field[:name]
-        memo[field_name.to_s] = (public_send(field_name) || field[:default])
+        memo[field_name.to_s] = (public_send(field_name) || field[:default]).as_json
         memo
       end
     end

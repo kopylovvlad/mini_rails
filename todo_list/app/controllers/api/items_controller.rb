@@ -5,12 +5,12 @@ module Api
     def index
       group = Group.find(params[:group_id])
       items = group.items
-      render_json items
+      render_json(items)
     end
 
     def show
       item = Item.where(show_params).first
-      render_json item
+      render_json(item)
     end
 
     private

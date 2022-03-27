@@ -3,7 +3,7 @@
 require_relative 'item_serializer'
 
 class GroupSerializer < MiniActiveRecord::Serializer
-  attributes :id, :title, :description, :full_title
+  attributes :id, :title, :description, :full_title, :created_at
   has_many :items, each_serializer: ::ItemSerializer
 
   def full_title

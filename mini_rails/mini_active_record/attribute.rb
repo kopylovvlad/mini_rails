@@ -9,6 +9,7 @@ module MiniActiveRecord
       base.fields = []
 
       base.attribute :id, type: String
+      base.attribute :created_at, type: DateTime
 
       base.alias_method :available_fields, :fields
     end
