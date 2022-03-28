@@ -1,8 +1,11 @@
 #!/usr/bin/env ruby
 
-require "bundler/setup"
+require 'bundler/setup'
+require '../mini_rails/mini_rails'
 require '../mini_rails/mini_rails/command'
-require "./app.rb" # Load the application
+require './config/application'
+
+Bundler.require(*MiniRails.groups) if defined?(Bundler)
 
 aliases = {
   "c"  => "console",

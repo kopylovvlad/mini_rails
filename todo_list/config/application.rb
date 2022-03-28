@@ -1,3 +1,12 @@
 # frozen_string_literal: true
 
-# TODO: replace app config here
+module TodoList
+  # App config is here
+  class Application < MiniRails::Application
+    # For code reloading
+    config.autoload_paths << MiniRails.root.join('lib')
+
+    # In order to change DB-driver
+    # config.driver = :yaml
+  end
+end

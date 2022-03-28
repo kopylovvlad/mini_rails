@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module MiniRails
+  # TODO: Implement 'new' command
   class Command
     # @param command [String]
     # @param argv [Array<String>]
