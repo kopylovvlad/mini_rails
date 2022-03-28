@@ -3,6 +3,7 @@
 module MiniActionController
   class Base
     include MiniActionController::Render
+    include MiniActionController::Callbacks
 
     def initialize(params, headers)
       @params = Parameters.new(params)
@@ -11,6 +12,7 @@ module MiniActionController
 
     # @param controler_method_name [String, Symbol]
     def build_response(controler_method_name)
+      run_callbacks_for(controler_method_name.to_sym)
       response = public_send(controler_method_name)
       render_layout(response)
     end

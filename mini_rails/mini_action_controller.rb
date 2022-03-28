@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'mini_action_controller/callbacks'
 require_relative 'mini_action_controller/parameters'
 require_relative 'mini_action_controller/render'
 require_relative 'mini_action_controller/response'

@@ -7,6 +7,10 @@
 MiniActiveRouter::Base.instance.draw do
   get '/', to: 'home#index'
 
+  # test
+  get '/test1', to: 'test#test1'
+  get '/test2', to: 'test#test2'
+
   # Group scope - HTML
   post '/groups', to: 'groups#create'
   delete '/groups/:id', to: 'groups#destroy'

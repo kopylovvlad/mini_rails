@@ -2,6 +2,18 @@
 
 module MiniActiveSupport
   module Array
+    def empty?
+      size == 0
+    end
+
+    def present?
+      !empty?
+    end
+
+    def exclude?(object)
+      !include?(object)
+    end
+
     # @return [Array<Object>]
     def as_json
       map(&:as_json)
