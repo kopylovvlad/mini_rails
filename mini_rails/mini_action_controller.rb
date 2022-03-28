@@ -4,10 +4,10 @@ require_relative 'mini_action_controller/callbacks'
 require_relative 'mini_action_controller/parameters'
 require_relative 'mini_action_controller/render'
 require_relative 'mini_action_controller/response'
+require_relative 'mini_action_controller/rescuable'
 
 require_relative 'mini_action_controller/base'
 
-# TODO: Add json response
 module MiniActionController
   # TODO: Add status matcher ex:
   # status: :ok

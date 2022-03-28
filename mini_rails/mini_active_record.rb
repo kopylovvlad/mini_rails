@@ -2,6 +2,7 @@
 
 require_relative 'mini_active_record/attribute'
 require_relative 'mini_active_record/association'
+require_relative 'mini_active_record/exceptions'
 require_relative 'mini_active_record/driver'
 require_relative 'mini_active_record/operate'
 require_relative 'mini_active_record/relation'
