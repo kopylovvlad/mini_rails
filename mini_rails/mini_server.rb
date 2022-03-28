@@ -28,7 +28,10 @@ class MiniServer
   def fetch_data
     client = @server.accept
     # Accept a HTTP request and parse it
+
+    # TODO: fix `readline': end of file reached (EOFError)
     request_line = client.readline
+
     method_token, path_with_params, version_number = request_line.split
     # fetch params from a request
     action_params = ::MiniActionParams.parse(client, path_with_params)

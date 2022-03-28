@@ -8,8 +8,9 @@ Proof of Work version
 
 Добавить:
 
+* Fix end of file reached
 * Write rescue_from for controller
-* Fix '/' in end path error
+* Fix '/' in end path error (404)
 * Markup language
 * yard
 * Write global handler for 500 error
