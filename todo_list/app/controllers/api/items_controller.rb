@@ -9,7 +9,7 @@ module Api
     end
 
     def show
-      item = Item.where(show_params).first
+      item = Item.find_by!(show_params)
       render_json(item)
     end
 
