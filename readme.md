@@ -8,8 +8,8 @@ Proof of Work version
 
 Добавить:
 
+* Replace app config to config/application.rb
 * Fix end of file reached
-* Write rescue_from for controller
 * Fix '/' in end path error (404)
 * Markup language
 * yard

@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require '../mini_rails/mini_rails/command'
+require "./app.rb" # Load the application
+
+aliases = {
+  "c"  => "console",
+  "s"  => "server"
+}
+
+command = ARGV.shift
+command = aliases[command] || command
+
+MiniRails::Command.invoke command, ARGV

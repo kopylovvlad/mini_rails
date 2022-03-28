@@ -1,8 +1,0 @@
-#!/usr/bin/env ruby
-
-require "bundler/setup"
-require "./app.rb" # Load the application
-require "irb"
-
-TodoList::Application.load_code
-IRB.start(__FILE__)
