@@ -34,10 +34,7 @@ module MiniActionController
           raise ArgumentError, 'No :with argument'
         end
 
-        rescue_attempt = {
-          exception: exception,
-          with: with
-        }
+        rescue_attempt = { exception: exception, with: with }
         self.rescue_attempts = self.rescue_attempts + [rescue_attempt]
       end
     end
