@@ -6,17 +6,14 @@ module MiniActionView
 
     # @param response [MiniActionController::Response]
     def render_response(layout, response)
-      status_code = response.status
+      status_code, _status_text = response.status.split(' ')
       response_message = response.response_message
       additional_headers = response.headers.map{ |k,v| "#{k}: #{v}" }.join("\n\r")
-      # Construct the HTTP request
-      <<~MSG
-        HTTP/1.1 #{status_code}
-        Content-Type: text/html
-        #{additional_headers}
+      headers = {"Content-Type" => "text/html"}.merge(response.headers)
+      response_body = render_layout(layout) { response_message }
 
-        #{render_layout(layout) { response_message }}
-      MSG
+      # Construct the Rack response
+      [status_code, headers, [response_body]]
     end
 
     private

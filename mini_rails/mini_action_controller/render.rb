@@ -45,7 +45,7 @@ module MiniActionController
     end
 
     # @param response [MiniActionController::Response]
-    def render_layout(response)
+    def build_rack_response(response)
       case response.content_type
       when 'html'
         variables_to_pass = collect_variables

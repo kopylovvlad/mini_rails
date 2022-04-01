@@ -18,37 +18,8 @@ module MiniRails
 
     def self.run
       load_code
-      code_loader = MiniCodeLoader.new
-      server = MiniServer.new
-
-      # TODO: multy tread
-      loop do
-        code_loader.check_updates!
-
-        server.fetch_data do |request|
-          # client, method_token, path
-          method_token = request.method_token
-          path = request.path
-          params = request.params
-          header = request.header
-          controller_name = request.controller_name
-          controler_method_name = request.controler_method_name
-
-          # Decide what to respond
-          controller_class_name = "#{controller_name.camelize}Controller"
-          begin
-            controller_class = Object.const_get controller_class_name
-          rescue NameError => e
-            puts "Error: Can't find class #{controller_class_name}"
-            raise e
-          end
-
-          controller = controller_class.new(params, header)
-          # Construct the HTTP response
-          http_response = controller.build_response(controler_method_name)
-          http_response
-        end
-      end
+      # code_loader = MiniCodeLoader.new
+      ::MiniServer.start
     end
   end
 end

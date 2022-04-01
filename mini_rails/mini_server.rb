@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Base. Rack layer: START
+# TODO: replace to MiniRails namespace
 class MiniServer
   # NOTE: Value object
   class ClientRequest
@@ -16,25 +16,36 @@ class MiniServer
     end
   end
 
-  attr_reader :port
+  # attr_reader :port
 
-  def initialize
-    @port = ENV['PORT'] || 9999
-    @server = TCPServer.new(@port)
-    puts "✅ Вебсервер готов работать в #{MiniRails.env} окружении, товарищь."
-    puts "Теперь открой в браузере http://localhost:#{@port}/"
+  # def initialize
+  #   @port = ENV['PORT'] || 9999
+  #   @server = TCPServer.new(@port)
+  #   puts "✅ Вебсервер готов работать в #{MiniRails.env} окружении, товарищь."
+  #   puts "Теперь открой в браузере http://localhost:#{@port}/"
+  # end
+
+  def self.start
+    ::Rack::Server.start(
+      :app => ::MiniServer.new,
+      :Port => ENV['PORT'] || 9999,
+      :server => 'puma', # cgi/thin/puma/webrick
+      :daemon => false,
+      :pid => "server.pid",
+      :restart => nil,
+      :log_to_stdout => true
+    )
   end
 
-  def fetch_data
-    client = @server.accept
-    # Accept a HTTP request and parse it
+  def call(env)
+    req = Rack::Request.new(env)
 
-    # TODO: fix `readline': end of file reached (EOFError)
-    request_line = client.readline
+    # Fetch params from a request
+    method_token = req.request_method
+    path = req.path || req.path_info
+    path_with_params = req.fullpath
 
-    method_token, path_with_params, version_number = request_line.split
-    # fetch params from a request
-    action_params = ::MiniActionParams.parse(client, path_with_params)
+    action_params = ::MiniActionParams.parse(req)
     params = action_params.params
     headers = action_params.headers
 
@@ -42,9 +53,7 @@ class MiniServer
     if method_token == 'POST' && ['DELETE', 'PUT', 'PATCH'].include?(params[:_method]&.upcase)
       method_token = params[:_method].upcase
     end
-
-    puts "✅ Приняли запрос с методом #{method_token} на ручку #{path_with_params} с версией #{version_number}"
-    path, _get_params = path_with_params.split('?')
+    puts "✅ Приняли запрос с методом #{method_token} на ручку #{path_with_params}"
 
     # Route's placeholder support
     selected_route = MiniActiveRouter::Base.instance.find(method_token, path)
@@ -55,12 +64,29 @@ class MiniServer
     puts "Его обработает #{controller_name.camelize}##{controler_method_name} ..."
     request = ClientRequest.new(method_token, path, params, headers, controller_name, controler_method_name)
 
-    # Construct the HTTP request
-    http_response = yield request
-
     # Return the HTTP response to client
-    client.puts(http_response)
-    client.close
+
+    # client, method_token, path
+    method_token = request.method_token
+    path = request.path
+    params = request.params
+    header = request.header
+    controller_name = request.controller_name
+    controler_method_name = request.controler_method_name
+
+    # Decide what to respond
+    controller_class_name = "#{controller_name.camelize}Controller"
+    begin
+      controller_class = Object.const_get controller_class_name
+    rescue NameError => e
+      puts "Error: Can't find class #{controller_class_name}"
+      raise e
+    end
+
+    controller = controller_class.new(params, header)
+    # Construct the HTTP response
+    http_response = controller.build_response(controler_method_name)
+    http_response
   end
 end
 # Base. Rack layer: END

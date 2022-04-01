@@ -19,7 +19,7 @@ module MiniActionController
       rescue StandardError => e
         response = try_to_rescue(e)
       end
-      render_layout(response)
+      build_rack_response(response)
     end
 
     private

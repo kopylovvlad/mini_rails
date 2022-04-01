@@ -8,13 +8,11 @@ Proof of Work version
 
 Добавить:
 
-* Replace app config to config/application.rb
 * Fix end of file reached
 * Fix '/' in end path error (404)
 * Markup language
 * yard
 * Write global handler for 500 error
-* Add Rails CLI
 * Implement save! and validations
 * ActiveRecord add proxy
 * Выложить парням с пометкой PS ищу работу!
