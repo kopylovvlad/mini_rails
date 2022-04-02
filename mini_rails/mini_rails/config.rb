@@ -4,11 +4,10 @@ module MiniRails
   class Config
     include ::Singleton
 
-    attr_reader :static_paths, :autoload_paths
+    attr_reader :load_paths
 
     def initialize
-      @static_paths = ['config']
-      @autoload_paths = ['app/controllers', 'app/models', 'app/serializers']
+      @load_paths = ['config', 'app/controllers', 'app/models', 'app/serializers']
       @@driver = :yaml
     end
 
@@ -20,16 +19,10 @@ module MiniRails
       @@driver = value
     end
 
-    def static_paths=(string)
-      @static_paths << string
-      @static_paths.uniq!
-      @static_paths
-    end
-
-    def autoload_paths=(string)
-      @autoload_paths << string
-      @autoload_paths.uniq!
-      @autoload_paths
+    def load_paths=(string)
+      @load_paths << string
+      @load_paths.uniq!
+      @load_paths
     end
   end
 end

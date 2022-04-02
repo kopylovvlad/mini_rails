@@ -7,12 +7,7 @@ module MiniRails
     end
 
     def self.load_code
-      config.static_paths.each do |path|
-        Dir[MiniRails.root.join("#{path}/**/*.rb")].each { |f| require_relative f }
-      end
-
-      # TODO: delete
-      config.autoload_paths.each do |path|
+      config.load_paths.each do |path|
         Dir[MiniRails.root.join("#{path}/**/*.rb")].each { |f| require_relative f }
       end
     end

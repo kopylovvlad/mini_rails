@@ -12,7 +12,7 @@ module MiniRails
 
       ::Rack::Server.start(
         :app => app,
-        :Port => ENV['PORT'] || 9999,
+        :Port => ENV['PORT'] || 9292,
         :server => 'puma', # cgi/thin/puma/webrick
         :daemon => false,
         :pid => "server.pid",
