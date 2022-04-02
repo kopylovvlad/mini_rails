@@ -9,7 +9,6 @@ Proof of Work version
 Добавить:
 
 * Wrap MiniRail to a gem
-* Fix '/' in end path error (404)
 * Markup language
 * yard
 * Write global handler for 500 error

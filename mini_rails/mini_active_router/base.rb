@@ -47,7 +47,10 @@ module MiniActiveRouter
       @fallback_route = Route.new(nil, nil, to: to)
     end
 
+    # @param method [String]
+    # @param path [String]
     def find(method, path)
+      # Delete / in the end of path
       selected_route = @map.find{ |route| route.match?(method, path) }
       if !selected_route.nil?
         selected_route

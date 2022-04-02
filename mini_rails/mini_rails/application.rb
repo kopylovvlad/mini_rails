@@ -22,8 +22,10 @@ module MiniRails
 
       # Fetch params from a request
       method_token = req.request_method
-      path = req.path || req.path_info
-      path_with_params = req.fullpath
+      raw_path = req.path || req.path_info
+      # Delete / in the end of path
+      path = (raw_path == '/' ? raw_path : raw_path.gsub(/\/+$/,''))
+      _p, path_params = req.fullpath.split('?')
 
       action_params = ::MiniActionParams.parse(req)
       params = action_params.params
@@ -33,7 +35,7 @@ module MiniRails
       if method_token == 'POST' && ['DELETE', 'PUT', 'PATCH'].include?(params[:_method]&.upcase)
         method_token = params[:_method].upcase
       end
-      puts "✅ Приняли запрос с методом #{method_token} на ручку #{path_with_params}"
+      puts "✅ Приняли запрос с методом #{method_token} на ручку #{path} с параметрами '#{path_params}'"
 
       # Route's placeholder support
       selected_route = MiniActiveRouter::Base.instance.find(method_token, path)
@@ -54,8 +56,7 @@ module MiniRails
 
       controller = controller_class.new(params, headers)
       # Construct the HTTP response and return it
-      http_response = controller.build_response(controler_method_name)
-      http_response
+      controller.build_response(controler_method_name)
     end
   end
 end
