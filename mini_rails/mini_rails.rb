@@ -20,24 +20,12 @@ require_relative 'mini_action_view'
 require_relative 'mini_active_record'
 require_relative 'mini_active_router'
 require_relative 'mini_code_loader'
-# require_relative 'mini_rails'
-require_relative 'mini_server'
 
 # require_relative 'mini_rails'
 require_relative 'mini_rails/application'
 require_relative 'mini_rails/config'
 require_relative 'mini_rails/env'
-
-# TODO: find all rails parts
-# rails
-# zeitwerk - code loader ✅
-# activesupport
-# actionview - in progress
-# actionpack - responding to web requests
-# railties
-# activemodel
-# activerecord
-# globalid
+require_relative 'mini_rails/server'
 
 module MiniRails
   # @return [Array<String>]

@@ -8,7 +8,7 @@ Proof of Work version
 
 Добавить:
 
-* Fix end of file reached
+* Wrap MiniRail to a gem
 * Fix '/' in end path error (404)
 * Markup language
 * yard

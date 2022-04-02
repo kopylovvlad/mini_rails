@@ -18,8 +18,7 @@ module MiniRails
 
     def self.run
       load_code
-      # code_loader = MiniCodeLoader.new
-      ::MiniServer.start
+      ::MiniRails::Server.start
     end
   end
 end
