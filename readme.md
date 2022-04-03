@@ -8,12 +8,8 @@ Proof of Work version
 
 Добавить:
 
-* Add proxy for relations
-* Implement .scope method
 * Wrap MiniRail to a gem
-* Markup language
 * yard
-* Write global handler for 500 error
 * Implement save! and validations
 * Выложить парням с пометкой PS ищу работу!
 * Implement rspec

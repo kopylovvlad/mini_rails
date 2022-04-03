@@ -65,7 +65,14 @@ module MiniActiveRecord
     # .where().each {}
     # .where().where().map {}
     def method_missing(message, *args, &block)
-      execute.public_send(message, *args, &block)
+      # 1: Try to find scope in model class
+      scope_meta = @model_class.scopes.find{ |i| i[:name] == message }
+      if !scope_meta.nil?
+        instance_exec(&scope_meta[:proc])
+      else
+        # 2: Execute and find method
+        execute.public_send(message, *args, &block)
+      end
     end
 
     # DB Driver

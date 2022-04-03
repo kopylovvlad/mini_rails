@@ -3,8 +3,12 @@
 class Item < MiniActiveRecord::Base
   attribute :title, type: String
   attribute :group_id, type: String
+  attribute :done, type: [TrueClass, FalseClass], default: false
 
   belongs_to :group
+
+  scope :active, -> { where(done: false) }
+  scope :not_active, -> { where(done: true) }
 
   class << self
     def permited_params
