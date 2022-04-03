@@ -16,7 +16,7 @@ module MiniActiveRecord
 
     module ClassMethods
       # @param field_name [String, Symbol]
-      # @option options [Class] :type
+      # @option options [Class, Array<Class>] :type
       # @option options [Object] :default The field's default
       def attribute(field_name, type: String, default: nil)
         new_field_params = {
@@ -37,9 +37,16 @@ module MiniActiveRecord
             return false if value.nil?
 
             field_params = fields.find{ |i| i[:name] == field_name.to_sym }
-            unless value.is_a?(field_params[:type])
-              puts "ERROR: #{field_name} with value #{value} is not a #{field_params[:type]}"
-              return nil
+            if type.is_a?(Array)
+              unless type.include?(value.class)
+                puts "ERROR: #{field_name} with value #{value} is not in #{field_params[:type]}"
+                return nil
+              end
+            else
+              unless value.is_a?(field_params[:type])
+                puts "ERROR: #{field_name} with value #{value} is not a #{field_params[:type]}"
+                return nil
+              end
             end
 
             instance_variable_set("@#{field_name}", value)
