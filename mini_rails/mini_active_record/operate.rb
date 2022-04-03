@@ -8,6 +8,7 @@ module MiniActiveRecord
 
     def destroy
       self.class.delete_by_id(id)
+      true
     end
 
     def save
@@ -18,6 +19,7 @@ module MiniActiveRecord
         json[field[:name]] = public_send(field[:name])
       end
       self.class.add_data(json)
+      true
     end
 
     module ClassMethods

@@ -15,6 +15,9 @@ module MiniActiveRecord
       end
 
       def _add_data(new_item, table_name)
+        # Delete existed data
+        _delete_by_id(new_item[:id], table_name)
+        # Record new data
         store = init_store(table_name)
         store.transaction do
           store[table_name.to_sym] << new_item
