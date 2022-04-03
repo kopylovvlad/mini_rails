@@ -22,19 +22,41 @@ module MiniActiveRecord
       end
 
       def _all(table_name)
+        _where({}, nil, table_name)
+      end
+
+      def _where(conditions, table_name, limit = nil)
         store = init_store(table_name)
         store.transaction do
-          store[table_name.to_sym]
+          memo = store[table_name.to_sym]
+          memo = conditions.reduce(memo) do |memo, (cond_key, cond_value)|
+            if cond_value.is_a?(Array)
+              memo.select{ |i| cond_value.include?(i[cond_key])  }
+            else
+              memo.select{ |i| i[cond_key] == cond_value }
+            end
+          end
+
+          if limit.nil?
+            memo
+          elsif limit >= 0
+            memo.first(limit)
+          elsif limit < 0
+            memo.last(-limit)
+          end
         end
       end
 
       def _find(selected_id, table_name)
-        store = init_store(table_name)
-        store.transaction do
-          store[table_name.to_sym].find do |i|
-            i[:id] == selected_id
-          end
-        end
+        _where({id: selected_id}, 1, table_name)
+      end
+
+      def _count(conditions, table_name)
+        _where(conditions, table_name).size
+      end
+
+      def _pluck(conditions, table_name, attribute)
+        _where(conditions, table_name).map{ |i| i[attribute] }
       end
 
       def init_store(table_name)

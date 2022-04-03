@@ -4,7 +4,7 @@ module Api
   class ItemsController < ApplicationController
     def index
       group = Group.find(params[:group_id])
-      items = group.items
+      items = group.items.to_a
       render_json(items)
     end
 

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# TODO: create yml-driver object
 module MiniActiveRecord
   module Operate
     def self.included(base)
@@ -27,7 +26,7 @@ module MiniActiveRecord
       end
 
       def driver
-        # Driver
+        # DB Driver
         _driver = ::MiniRails::Application.config.driver
         Object.const_get("MiniActiveRecord::#{_driver.to_s.camelize}Driver")
       end
