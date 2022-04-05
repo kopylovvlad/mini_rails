@@ -27,6 +27,14 @@ module MiniActiveSupport
       word
     end
 
+    def to_bool
+      if self == 'true'
+        true
+      else
+        false
+      end
+    end
+
     # @return [String]
     def as_json
       self

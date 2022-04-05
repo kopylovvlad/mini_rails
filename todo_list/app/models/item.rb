@@ -10,6 +10,10 @@ class Item < MiniActiveRecord::Base
   scope :active, -> { where(done: false) }
   scope :not_active, -> { where(done: true) }
 
+  def active?
+    done != true
+  end
+
   class << self
     def permited_params
       [:title, :group_id]

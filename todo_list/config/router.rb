@@ -18,6 +18,7 @@ MiniActiveRouter::Base.instance.draw do
   # Items scope - HTML
   get '/groups/:group_id/items', to: 'items#index'
   post '/groups/:group_id/items', to: 'items#create'
+  patch '/groups/:group_id/items/:id', to: 'items#update'
   delete '/groups/:group_id/items/:id', to: 'items#destroy'
 
   # Items scope - JSON

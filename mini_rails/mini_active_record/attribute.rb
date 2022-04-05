@@ -35,6 +35,9 @@ module MiniActiveRecord
 
           define_method("#{field_name}=") do |value|
             return false if value.nil?
+            if ['true', 'false'].include?(value)
+              value = value.to_bool
+            end
 
             field_params = fields.find{ |i| i[:name] == field_name.to_sym }
             if type.is_a?(Array)

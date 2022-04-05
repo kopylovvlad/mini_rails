@@ -1,7 +1,10 @@
 <div class="row mb-5">
   <div class="col-sm-6">
     <h3>Лист: <%= @group.title %></h3>
-    <small>Описание: <%= @group.description %></small>
+    <small>Описание: <%= @group.description %></small><br/>
+    <small>Всего задач: <%= @group.items.count %></small><br/>
+    <small>Активных задач: <%= @group.items.active.count %></small><br/>
+    <small>Задач выполнено: <%= @group.items.not_active.count %></small><br/>
     <form action="/groups/<%= @group.id %>" method="post" enctype="application/x-www-form-urlencoded" class="mt-2">
       <input type="hidden" name="_method" value="DELETE">
       <button class="btn btn-danger btn-sm">удалить список</button>
@@ -15,21 +18,7 @@
   <div class="col">
     <ul class="list-group">
       <% if @items.size > 0 %>
-        <% @items.each do |item| %>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-sm-8">
-                <p><%= item.title %></p>
-              </div>
-              <div class="col-sm-4">
-                <form action="/groups/<%= @group.id %>/items/<%= item.id %>" method="post" enctype="application/x-www-form-urlencoded">
-                  <input type="hidden" name="_method" value="DELETE">
-                  <button class="btn btn-danger btn-sm">Удалить пункт</button>
-                </form>
-              </div>
-            </div>
-          </li>
-        <% end %>
+        <%= render_partial :list_item, collection: @items %>
       <% else %>
         <li class="list-group-item">Данных нет. Пожалуйста добавьте данные в лист</li>
       <% end %>
