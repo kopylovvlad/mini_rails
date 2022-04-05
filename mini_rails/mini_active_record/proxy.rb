@@ -3,12 +3,8 @@
 module MiniActiveRecord
   # TODO: add order, reorder
   class Proxy
-    # @param table_name [String]
-    # @param model_class [ActiveRecord::Base]
     # @param where_condition [Hash]
-    def initialize(table_name, model_class, where_condition = {})
-      @table_name = table_name
-      @model_class = model_class
+    def initialize(where_condition = {})
       @where_condition = where_condition.transform_keys(&:to_sym)
       @limit = nil
     end
@@ -43,18 +39,28 @@ module MiniActiveRecord
 
     # @return [Integer]
     def count
-      driver.count(@where_condition, @table_name)
+      driver.count(@where_condition, table_name)
     end
 
     # @param attribute [String, Symbol]
     # @return [Array<Object>]
     def pluck(attribute)
-      driver.pluck(@where_condition, @table_name, attribute.to_sym)
+      driver.pluck(@where_condition, table_name, attribute.to_sym)
     end
 
     # NOTE: In order to see result in console
     def inspect
       execute
+    end
+
+    # @return [String]
+    def table_name
+      model_class.table_name
+    end
+
+    # @return [ActiveRecord::Base]
+    def model_class
+      raise NoMethodError
     end
 
     private
@@ -66,7 +72,7 @@ module MiniActiveRecord
     # .where().where().map {}
     def method_missing(message, *args, &block)
       # 1: Try to find scope in model class
-      scope_meta = @model_class.scopes.find{ |i| i[:name] == message }
+      scope_meta = model_class.scopes.find{ |i| i[:name] == message }
       if !scope_meta.nil?
         instance_exec(&scope_meta[:proc])
       else
@@ -84,8 +90,8 @@ module MiniActiveRecord
     # Run driver and wrap raw data to model-class
     # @return [Array<ActiveRecord::Base>]
     def execute
-      raw_data = driver.where(@where_condition, @table_name, @limit)
-      raw_data.map { |data| @model_class.new(data) }
+      raw_data = driver.where(@where_condition, table_name, @limit)
+      raw_data.map { |data| model_class.new(data) }
     end
   end
 end

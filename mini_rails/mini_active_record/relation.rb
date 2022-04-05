@@ -48,7 +48,8 @@ module MiniActiveRecord
     private
 
     def init_proxy
-      Proxy.new(self.table_name, self, {})
+      # proxy_class is a child of MiniActiveRecord::Proxy
+      self.proxy_class.new({})
     end
   end
 end

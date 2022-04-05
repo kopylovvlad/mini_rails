@@ -9,6 +9,24 @@ module MiniActiveRecord
     extend Association
     extend Relation
 
+    def self.inherited(base)
+      # Create proxy class for the model
+      proxy_class = Class.new(::MiniActiveRecord::Proxy)
+      # Inject base class to the method .model_class
+      # Can't do in inside Class.new {} because it doesn't get base from global scope
+      proxy_class.define_method(:model_class) do
+        Object.const_get(base.name)
+      end
+      # Name the new class as Proxy
+      proxy_class_name = "#{base.to_s}Proxy"
+      ::MiniActiveRecord.const_set(proxy_class_name, proxy_class)
+
+      # Define class method for base class
+      base.define_singleton_method(:proxy_class) do
+        Object.const_get("MiniActiveRecord::#{proxy_class_name}")
+      end
+    end
+
     def initialize(params = {})
       params.transform_keys!(&:to_sym)
       # Fill fields and set default values
