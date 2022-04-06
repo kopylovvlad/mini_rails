@@ -4,7 +4,7 @@ GEM
     ast (2.4.2)
     backport (1.2.0)
     benchmark (0.2.0)
-    coderay (1.1.3)
+    byebug (11.1.3)
     diff-lcs (1.5.0)
     e2mmap (0.1.0)
     jaro_winkler (1.5.4)
@@ -12,16 +12,12 @@ GEM
       rexml
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
-    method_source (1.0.0)
     nio4r (2.5.8)
     nokogiri (1.13.3-x86_64-darwin)
       racc (~> 1.4)
     parallel (1.21.0)
     parser (3.1.1.0)
       ast (~> 2.4.1)
-    pry (0.14.1)
-      coderay (~> 1.1)
-      method_source (~> 1.0)
     puma (5.6.4)
       nio4r (~> 2.0)
     racc (1.6.0)
@@ -69,7 +65,7 @@ PLATFORMS
   x86_64-darwin-17
 
 DEPENDENCIES
-  pry
+  byebug
   puma
   rack
   rubocop

@@ -1,17 +1,11 @@
 # frozen_string_literal: true
 
 module MiniRails
-  class Server
+  # Class to run the application on local machine as a ruby-script
+  class LocalServer
     def self.start
-      app = if ::MiniRails.env.development?
-              # Application with reloading
-              Rack::Reloader.new(::MiniRails::Application.new)
-            else
-              ::MiniRails::Applications.new
-            end
-
       ::Rack::Server.start(
-        :app => app,
+        :app => ::MiniRails::Application.build_app,
         :Port => ENV['PORT'] || 9292,
         :server => 'puma', # cgi/thin/puma/webrick
         :daemon => false,

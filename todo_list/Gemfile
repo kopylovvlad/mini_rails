@@ -6,7 +6,7 @@ gem 'rack'
 gem 'puma'
 
 group :development do
-  gem 'pry'
+  gem 'byebug'
   gem 'solargraph'
   gem 'rubocop'
 end

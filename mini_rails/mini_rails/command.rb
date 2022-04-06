@@ -17,18 +17,18 @@ module MiniRails
 
     def initialize
       @application = MiniRails::Application.descendants.first
+      @application.load_code
     end
 
     # @param argv [Array<String>]
     def console(argv)
       require "irb"
-      @application.load_code
       IRB.start(__FILE__)
     end
 
     # @param argv [Array<String>]
     def server(argv)
-      @application.run
+      ::MiniRails::LocalServer.start
     end
   end
 end

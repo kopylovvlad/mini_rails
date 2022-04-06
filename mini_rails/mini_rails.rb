@@ -15,6 +15,7 @@ require_relative 'mini_active_support'
 
 # By ABC
 require_relative 'mini_action_controller'
+require_relative 'mini_action_dispatch'
 require_relative 'mini_action_params'
 require_relative 'mini_action_view'
 require_relative 'mini_active_record'
@@ -24,7 +25,7 @@ require_relative 'mini_code_loader'
 require_relative 'mini_rails/application'
 require_relative 'mini_rails/config'
 require_relative 'mini_rails/env'
-require_relative 'mini_rails/server'
+require_relative 'mini_rails/local_server'
 
 module MiniRails
   # @return [Array<String>]

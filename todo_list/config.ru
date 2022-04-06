@@ -9,5 +9,6 @@ Bundler.require(*MiniRails.groups) if defined?(Bundler)
 
 # Init the applications and load required code
 MiniRails::Application.descendants.first.load_code
+
 # Run the application
-run ::MiniRails::Application.new
+run ::MiniRails::Application.build_app
