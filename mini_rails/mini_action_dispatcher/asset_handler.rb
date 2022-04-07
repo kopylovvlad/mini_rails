@@ -18,27 +18,38 @@ module MiniActionDispatch
     def attempt(env)
       request = Rack::Request.new(env)
       path_info = request.path_info
-      if valid_request?(request) && file_exist?(path_info)
-        puts "✅ Приняли запрос с методом #{request.request_method} на ручку #{path_info}"
-        puts "Его обработает MiniActionDispatch::AssetHandler ..."
-        file_context = render_file(path_info)
-        return [200, build_headers(path_info), [file_context]]
+      if valid_request?(request)
+        file_type = match_file_type(path_info)
+        if file_exist?(path_info, file_type)
+          puts "✅ Приняли запрос с методом #{request.request_method} на ручку #{path_info}"
+          puts "Его обработает MiniActionDispatch::AssetHandler ..."
+          file_context = render_file(path_info, file_type)
+          return [200, build_headers(path_info), [file_context]]
+        end
       end
       nil
     end
 
     def valid_request?(request)
       (request.get? || request.head?) && request.path_info != '/' && \
-        request.path_info =~ /^\/assets\/.*\.css$/
+        ( request.path_info =~ /^\/assets\/.*\.css$/ || request.path_info =~ /^\/assets\/.*\.js$/ )
     end
 
-    def file_exist?(path_info)
-      !find_file(path_info).nil?
+    def match_file_type(path_info)
+      if path_info =~ /^\/assets\/.*\.css$/
+        'stylesheets'
+      elsif path_info =~ /^\/assets\/.*\.js$/
+        'javascript'
+      end
     end
 
-    def find_file(path_info)
+    def file_exist?(path_info, file_type)
+      !find_file(path_info, file_type).nil?
+    end
+
+    def find_file(path_info, file_type)
       file_name = path_info.gsub(/^\/assets\//, '')
-      file_path = ::MiniRails.root.join('app/assets/stylesheets', file_name)
+      file_path = ::MiniRails.root.join("app/assets/#{file_type}", file_name)
       if File.exist?(file_path)
         file_path
       elsif File.exist?("#{file_path}.erb")
@@ -48,9 +59,9 @@ module MiniActionDispatch
       end
     end
 
-    def render_file(path_info)
-      file_path = find_file(path_info)
-      ::MiniActionView::Asset.new.render(file_path)
+    def render_file(path_info, file_type)
+      file_path = find_file(path_info, file_type)
+      ::MiniActionView::Asset.new(file_type).render(file_path)
     end
 
     def build_headers(path_info)

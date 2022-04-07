@@ -33,6 +33,16 @@ module MiniActionView
       STR
     end
 
+    # Example of usage:
+    # javascript_include_tag "application"
+    # It generates link
+    # <script src="/assets/application.js"></script>
+    def javascript_include_tag(file_name)
+      <<~STR
+        <script src="/assets/#{file_name}.js"></script>
+      STR
+    end
+
     private
 
     def render_view(view_name, item: nil)
