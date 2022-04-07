@@ -8,6 +8,7 @@ module MiniRails
       # Base middlewares
       middlewares = []
       middlewares << ::MiniActionDispatch::StaticHandler
+      middlewares << ::MiniActionDispatch::AssetHandler
 
       # Middlewares for development end
       middlewares << Rack::Reloader if ::MiniRails.env.development?

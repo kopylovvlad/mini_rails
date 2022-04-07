@@ -19,7 +19,7 @@ module MiniActionDispatch
       request = Rack::Request.new(env)
       if valid_request?(request) && file_exist?(request)
         puts "✅ Приняли запрос с методом #{request.request_method} на ручку #{request.path_info}"
-        puts "Его обработает MiniActionDispatch::Static ..."
+        puts "Его обработает MiniActionDispatch::StaticHandler ..."
         return Rack::Files.new('public').call(env)
       end
       nil

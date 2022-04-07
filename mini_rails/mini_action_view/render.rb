@@ -14,6 +14,25 @@ module MiniActionView
       end
     end
 
+    # Example of usage:
+    # stylesheet_link_tag "application"
+    # It generates link
+    # <link href="/assets/application.css" media="screen" rel="stylesheet" />
+    def stylesheet_link_tag(file_name, media: 'screen')
+      # Check the file exist
+      erb_file_path = MiniRails.root.join("app/assets/stylesheets/#{file_name}.css.erb")
+      file_path = MiniRails.root.join("app/assets/stylesheets/#{file_name}.css")
+
+      if !File.exist?(file_path) && !File.exist?(erb_file_path)
+        raise "Stylesheet file '#{file_path}' does not exist"
+      end
+
+      # Render link
+      <<~STR
+        <link href="/assets/#{file_name}.css" media="#{media}" rel="stylesheet" />
+      STR
+    end
+
     private
 
     def render_view(view_name, item: nil)

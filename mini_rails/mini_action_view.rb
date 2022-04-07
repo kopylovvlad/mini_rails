@@ -2,6 +2,7 @@
 
 require 'erb'
 
+require_relative 'mini_action_view/asset'
 require_relative 'mini_action_view/reader'
 require_relative 'mini_action_view/cache'
 require_relative 'mini_action_view/json'
