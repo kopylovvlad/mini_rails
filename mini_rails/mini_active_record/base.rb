@@ -19,6 +19,11 @@ module MiniActiveRecord
       end
       # Name the new class as Proxy
       proxy_class_name = "#{base.to_s}Proxy"
+      # Destroy if the class exists
+      if MiniActiveRecord.const_defined?(proxy_class_name)
+        MiniActiveRecord.send(:remove_const, proxy_class_name)
+      end
+      # Create the class
       ::MiniActiveRecord.const_set(proxy_class_name, proxy_class)
 
       # Define class method for base class
