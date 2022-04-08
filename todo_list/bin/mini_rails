@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'bundler/setup'
-require '../mini_rails/mini_rails'
-require '../mini_rails/mini_rails/command'
+require 'mini_rails'
+require 'mini_rails/command'
 require './config/application'
 
 Bundler.require(*MiniRails.groups) if defined?(Bundler)

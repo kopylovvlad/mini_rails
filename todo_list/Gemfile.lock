@@ -1,3 +1,9 @@
+PATH
+  remote: ../mini_rails
+  specs:
+    mini_rails (0.0.1)
+      rack
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -66,8 +72,8 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  mini_rails!
   puma
-  rack
   rubocop
   solargraph
 
