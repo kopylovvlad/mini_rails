@@ -3,37 +3,47 @@
 module MiniActionView
   # TODO: Add cache
   class Asset
-    # @param file_type [String] 'stylesheets' or 'javascript'
-    def initialize(file_type)
-      @file_type = file_type
+    # @param original_file_path [String]
+    def initialize(original_file_path)
+      @original_file_path = original_file_path
+      @file_extention = nil
+      @current_folder = set_current_folder
     end
 
     # @param file_path [String]
-    def render(file_path)
+    def render(file_path = nil)
+      file_path ||= @original_file_path
+      file_context = File.open(file_path).read
       if file_path.to_s =~ /\.erb$/
-        ERB.new(File.open(file_path.to_s).read).result(binding)
+        ERB.new(file_context).result(binding)
       else
-        File.open(file_path.to_s).read
+        file_context
       end
     end
 
     private
 
-    def import(file_name)
-      file_path = ::MiniRails.root.join("app/assets/#{@file_type}", "#{file_name}.#{file_extention}")
-      if File.exist?(file_path)
-        render(file_path)
-      elsif File.exist?("#{file_path}.erb")
-        render("#{file_path}.erb")
+    def set_current_folder
+      @original_file_path =~ /(\..*)\.erb$/ || @original_file_path =~ /(\..*)$/
+      @file_extention = Regexp.last_match(1)
+      if @file_extention.end_with?('.css')
+        ::MiniRails.root.join('app/assets/stylesheets')
+      elsif @file_extention.end_with?('.js')
+        ::MiniRails.root.join('app/assets/javascript')
       else
-        raise "Can not open file '#{file_path}'"
+        raise "Undefined format for file '#{@original_file_path}'"
       end
     end
 
-    def file_extention
-      case @file_type
-      when 'stylesheets' then 'css'
-      when 'javascript' then 'js'
+    def import(file_name)
+      @original_file_path = @current_folder.join("#{file_name}#{@file_extention}")
+      # Try to find original file or file with .erb
+      if File.exist?(@original_file_path)
+        render(@original_file_path)
+      elsif File.exist?("#{@original_file_path}.erb")
+        render("#{@original_file_path}.erb")
+      else
+        raise "Can not open file '#{@original_file_path}'"
       end
     end
   end

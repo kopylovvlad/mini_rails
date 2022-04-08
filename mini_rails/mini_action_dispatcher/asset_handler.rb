@@ -17,55 +17,48 @@ module MiniActionDispatch
 
     def attempt(env)
       request = Rack::Request.new(env)
+      return nil unless valid_request?(request)
+
       path_info = request.path_info
-      if valid_request?(request)
-        file_type = match_file_type(path_info)
-        if file_exist?(path_info, file_type)
-          puts "✅ Приняли запрос с методом #{request.request_method} на ручку #{path_info}"
-          puts "Его обработает MiniActionDispatch::AssetHandler ..."
-          file_context = render_file(path_info, file_type)
-          return [200, build_headers(path_info), [file_context]]
-        end
+      file_path = find_original_file(path_info)
+      if file_path.present?
+        puts "✅ Приняли запрос с методом #{request.request_method} на ручку #{path_info}"
+        puts "Его обработает MiniActionDispatch::AssetHandler ..."
+        file_context = ::MiniActionView::Asset.new(file_path).render
+        return [200, build_headers(path_info), [file_context]]
       end
       nil
     end
 
     def valid_request?(request)
       (request.get? || request.head?) && request.path_info != '/' && \
-        ( request.path_info =~ /^\/assets\/.*\.css$/ || request.path_info =~ /^\/assets\/.*\.js$/ )
+        request.path_info =~ /^\/assets\/.*\.(?:css|js)$/
+    end
+
+    def find_original_file(path_info)
+      file_type = match_file_type(path_info)
+      file_name = path_info.gsub(/^\/assets\//, '')
+      file_path = ::MiniRails.root.join("app/assets/#{file_type}", file_name)
+      # Try to find original file or file with .erb
+      if File.exist?(file_path)
+        file_path.to_s
+      elsif File.exist?("#{file_path}.erb")
+        "#{file_path}.erb"
+      else
+        ''
+      end
     end
 
     def match_file_type(path_info)
-      if path_info =~ /^\/assets\/.*\.css$/
+      if path_info.end_with?('.css')
         'stylesheets'
-      elsif path_info =~ /^\/assets\/.*\.js$/
+      elsif path_info.end_with?('.js')
         'javascript'
       end
     end
 
-    def file_exist?(path_info, file_type)
-      !find_file(path_info, file_type).nil?
-    end
-
-    def find_file(path_info, file_type)
-      file_name = path_info.gsub(/^\/assets\//, '')
-      file_path = ::MiniRails.root.join("app/assets/#{file_type}", file_name)
-      if File.exist?(file_path)
-        file_path
-      elsif File.exist?("#{file_path}.erb")
-        "#{file_path}.erb"
-      else
-        nil
-      end
-    end
-
-    def render_file(path_info, file_type)
-      file_path = find_file(path_info, file_type)
-      ::MiniActionView::Asset.new(file_type).render(file_path)
-    end
-
     def build_headers(path_info)
-      path_info =~ /(\..*)\.erb$/ || path_info =~ /(\..*)$/
+      path_info =~ /(\..*)$/
       file_format = Regexp.last_match(1)
       { "Content-Type" => Rack::Mime.mime_type(file_format) }
     end
