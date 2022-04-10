@@ -3,7 +3,13 @@
 module MiniActionDispatch
   # Rack-middleware to handler rack-request
   class RequestHandler
+    def initialize(app = nil)
+      @app = app
+    end
+
     def call(env)
+      return @app.call(env) unless MiniActiveRouter::Base.instance.any?
+
       req = Rack::Request.new(env)
 
       # Fetch params from a request

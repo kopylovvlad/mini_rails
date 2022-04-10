@@ -9,6 +9,10 @@ module MiniActiveRouter
       @fallback_route = nil
     end
 
+    def any?
+      @map.size > 0
+    end
+
     def draw(&block)
       instance_eval &block
     end

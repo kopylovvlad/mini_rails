@@ -7,13 +7,14 @@ module MiniRails
     def self.build_app
       # Base middlewares
       middlewares = []
+      middlewares << ::MiniActionDispatch::RequestHandler
       middlewares << ::MiniActionDispatch::StaticHandler
       middlewares << ::MiniActionDispatch::AssetHandler
 
       # Middlewares for development end
       middlewares << Rack::Reloader if ::MiniRails.env.development?
 
-      base = ::MiniActionDispatch::RequestHandler.new
+      base = ::MiniActionDispatch::HelloHandler.new
       middlewares.reduce(base) do |app, middleware|
         puts "current app: #{middleware.to_s}"
         middleware.new(app)
