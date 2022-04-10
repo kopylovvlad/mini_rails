@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-# TODO: Add edit route
-# TODO: Add controller module support ex: to: 'api/items#index'
-# TODO: Replace MiniActiveRouter::Base to MiniRails.config
-# TODO: add handler for controller
 MiniActiveRouter::Base.instance.draw do
   get '/', to: 'home#index'
 
