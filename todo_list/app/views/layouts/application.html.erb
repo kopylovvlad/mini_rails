@@ -10,14 +10,14 @@
 </head>
 <body>
   <div class="container py-3">
-    <%= render_partial 'header' %>
+    <%= render_partial :header %>
 
     <main>
-      <%= render_partial 'alerts' %>
+      <%= render_partial :alerts %>
       <%= yield %>
     </main>
 
-    <%= render_partial 'footer' %>
+    <%= render_partial :footer %>
   </div>
 </body>
 </html>

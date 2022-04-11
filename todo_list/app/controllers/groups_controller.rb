@@ -2,8 +2,13 @@
 
 class GroupsController < ApplicationController
   def create
-    Group.new(permited_params).save
-    redirect_to '/'
+    @group = Group.new(permited_params)
+    if @group.save
+      redirect_to '/'
+    else
+      @alert = @group.errors.full_messages.join(', ')
+      render :new, status: "422 Unprocessable Entity"
+    end
   end
 
   def destroy

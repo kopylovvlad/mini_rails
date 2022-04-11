@@ -5,6 +5,8 @@ class Item < MiniActiveRecord::Base
   attribute :group_id, type: String
   attribute :done, type: [TrueClass, FalseClass], default: false
 
+  validates :title, presence: true, length: { max: 100, min: 3 }
+
   belongs_to :group
 
   scope :active, -> { where(done: false) }

@@ -6,6 +6,9 @@ class Group < MiniActiveRecord::Base
 
   has_many :items, class_name: 'Item'
 
+  validates :title, presence: true, length: { max: 100, min: 3 }
+  validates :description, length: { max: 100, min: 3 }
+
   class << self
     def permited_params
       [:title, :description]

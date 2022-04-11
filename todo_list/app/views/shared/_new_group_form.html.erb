@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col">
+    <form action="/groups" method="post" enctype="application/x-www-form-urlencoded">
+      <div class="mb-1">
+        <label for="group_name_main">Заголовок</label>
+        <input type="text" class="form-control" id="group_name_main" name="title" value="<%= item.title %>" placeholder="Писать сюда...">
+      </div>
+      <div class="mb-1">
+        <label for="group_descr_main">Описание</label>
+        <input type="text" class="form-control" id="group_descr_main" name="description" value="<%= item.description %>" placeholder="Писать сюда...">
+      </div>
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary btn-sm">Создать</button>
+      </div>
+    </form>
+  </div>
+  <div class="col">
+  </div>
+</div>

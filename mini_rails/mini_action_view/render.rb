@@ -3,14 +3,22 @@
 module MiniActionView
   module Render
     # @param view_name [String, Symbol]
+    #   Can be: '_header', :header, 'shared_header'
+    #   For symbol it adds _ in the beggining of name.
     # @param collection [Array<Object>] each item will be passed as 'item' variable
-    def render_partial(view_name, collection: [])
+    # @param item [Object]
+    def render_partial(view_name, collection: [], item: nil)
+      if view_name.is_a?(Symbol)
+        return render_partial("_#{view_name}", collection: collection, item: item)
+      end
+      unless view_name.include?('.html.erb')
+        return render_partial("#{view_name}.html.erb", collection: collection, item: item)
+      end
+
       if collection.size > 0
-        collection.map do |item|
-          render_view("_#{view_name}.html.erb", item: item)
-        end.join('')
+        collection.map { |i| render_view(view_name, item: i) }.join('')
       else
-        render_view("_#{view_name}.html.erb", item: nil)
+        render_view(view_name, item: item)
       end
     end
 
@@ -45,9 +53,15 @@ module MiniActionView
 
     private
 
+    # NOTE: If view_name has `/` symbol it searches for a file in app/views folder
+    # If view_name hasn't `/` symbol it searches for a file in entity folder
     def render_view(view_name, item: nil)
-      view_path = MiniRails.root.join('app', 'views', entity, view_name.to_s).to_s
+      root_path = MiniRails.root.join('app', 'views')
+      unless view_name.include?('/')
+        root_path = root_path.join(entity)
+      end
 
+      view_path = root_path.join(view_name).to_s
       ERB.new(read_or_open(view_path)).result(binding)
     end
   end
