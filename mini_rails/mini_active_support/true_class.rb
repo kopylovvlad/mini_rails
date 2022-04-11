@@ -15,6 +15,10 @@ module MiniActiveSupport
       end
     end
 
+    def present?
+      true
+    end
+
     # @return [TrueClass]
     def as_json
       self

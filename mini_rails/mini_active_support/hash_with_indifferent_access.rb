@@ -21,6 +21,10 @@ module MiniActiveSupport
       end
     end
 
+    def present?
+      @raw_hash.keys.size > 0
+    end
+
     # @param key [String, Symbol]
     def include?(key)
       if key.is_a?(::String)

@@ -2,6 +2,10 @@
 
 module MiniActiveSupport
   module Numeric
+    def present?
+      self > 0
+    end
+
     # @return [Numeric]
     def as_json
       self

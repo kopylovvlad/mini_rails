@@ -2,6 +2,10 @@
 
 module MiniActiveSupport
   module DateTime
+    def present?
+      true
+    end
+
     # @return [String]
     def as_json
       to_s

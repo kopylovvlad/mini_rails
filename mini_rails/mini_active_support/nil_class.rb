@@ -2,6 +2,10 @@
 
 module MiniActiveSupport
   module NilClass
+    def present?
+      false
+    end
+
     # @return [NilClass]
     def as_json
       self
