@@ -5,6 +5,7 @@ module MiniActiveRecord
     include Attribute
     include Operate
     include Scope
+    include Validation
 
     extend Association
     extend Relation
@@ -43,6 +44,7 @@ module MiniActiveRecord
           public_send("#{field_name}=", field[:default])
         end
       end
+      @errors_object = ::MiniActiveRecord::Validation::Errors.new
     end
 
     # @return [Hash<String, Object>]

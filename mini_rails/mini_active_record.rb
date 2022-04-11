@@ -9,6 +9,7 @@ require_relative 'mini_active_record/proxy'
 require_relative 'mini_active_record/relation'
 require_relative 'mini_active_record/scope'
 require_relative 'mini_active_record/serializer'
+require_relative 'mini_active_record/validation'
 require_relative 'mini_active_record/yaml_driver'
 
 require_relative 'mini_active_record/base'

@@ -14,12 +14,24 @@ module MiniActiveRecord
     def save
       @id ||= SecureRandom.uuid
       @created_at ||= DateTime.now
+      return false unless valid?
+
       json = {}
       available_fields.each do |field|
         json[field[:name]] = public_send(field[:name])
       end
       self.class.add_data(json)
       true
+    end
+
+    # @return [Boolean]
+    # @raise MiniActiveRecord::RecordInvalid
+    def save!
+      if save
+        true
+      else
+        raise MiniActiveRecord::RecordInvalid
+      end
     end
 
     module ClassMethods
