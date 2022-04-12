@@ -14,6 +14,10 @@ module MiniActiveSupport
       !include?(object)
     end
 
+    def exclude?(object)
+      !include?(object)
+    end
+
     # @return [Array<Object>]
     def as_json
       map(&:as_json)

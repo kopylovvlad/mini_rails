@@ -27,6 +27,10 @@ module MiniActiveSupport
       word
     end
 
+    def exclude?(object)
+      !include?(object)
+    end
+
     def to_bool
       if self == 'true'
         true
