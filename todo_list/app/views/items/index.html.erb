@@ -12,7 +12,7 @@
   </div>
 </div>
 
-<%= render_partial :new_item_form, item: Item.new %>
+<%= render_partial :new_item_form, locals: { item: Item.new } %>
 
 <div class="row">
   <div class="col">
