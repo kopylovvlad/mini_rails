@@ -57,10 +57,13 @@ module MiniActionView
       unless view_name.include?('/')
         root_path = root_path.join(entity)
       end
-
-      local_binding = binding
-      locals.each { |key, value| local_binding.local_variable_set(key, value) }
       view_path = root_path.join(view_name).to_s
+
+      # assign data from locals as local variables
+      local_binding = binding
+      locals.each do |key, value|
+        local_binding.local_variable_set(key, value)
+      end
       ERB.new(read_or_open(view_path)).result(local_binding)
     end
   end
