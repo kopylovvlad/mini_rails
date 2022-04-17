@@ -1,16 +1,102 @@
 # frozen_string_literal: true
 
 require 'pry'
+require 'singleton'
 
 class MatchError < StandardError
 end
 
 class Matcher
+  def initialize(value)
+    @value = value
+  end
+
+  def to(matcher)
+    matcher == @value
+  end
+
+  def to_not(matcher)
+    matcher != @value
+  end
 end
 
-# TODO: implement singleton
-class TestObserver
+class EqMatcher < Matcher
+  def ==(new_value)
+    a = @value == new_value
+    message = "'#{new_value}' not to equal '#{@value}'"
+    raise ::MatchError, message if a == false
+    a
+  end
+
+  def !=(new_value)
+    a = @value != new_value
+    message = "'#{new_value}' to equal '#{@value}'"
+    raise ::MatchError, message if a == false
+    a
+  end
 end
+
+
+module Matchers
+  def expect(object)
+    Matcher.new(object)
+  end
+
+  def eq(object)
+    EqMatcher.new(object)
+  end
+end
+
+
+class TestManager
+  include ::Singleton
+
+  attr_reader :info
+
+  def initialize
+    @info = {
+      success: [],
+      failure: []
+    }
+  end
+
+  def add_success(context)
+    @info[:success] << context
+  end
+
+  def add_failure(context, exception)
+    @info[:failure] << [context, exception]
+  end
+
+  def reset_stat!
+    @info[:success] = []
+    @info[:failure] = []
+    nil
+  end
+
+  def show_stat
+    success = @info[:success].size
+    failure = @info[:failure].size
+    all = success + failure
+
+    puts "Finished: #{all} examples, #{failure} failures"
+
+    return if failure == 0
+
+    puts "Failures:\n\r"
+
+    @info[:failure].each_with_index do |arr, index|
+      context, exc = arr
+      puts "  #{index+1}) #{context}"
+      puts '    Failure/Error: expect(StringCalculator.add("")).to eq(0)'
+      puts ''
+      puts "    #{exc.class}:"
+      puts "      #{exc.message}"
+      puts "    # ./spec/string_calculator_spec.rb:8:in `block (4 levels) in <top (required)>'"
+    end
+  end
+end
+
 
 module A
   # @described_object [String, Object] Object must respond to method .to_s
@@ -30,8 +116,10 @@ module A
   end
 end
 
+
 class ItLeaf
   include A
+  include Matchers
   attr_reader :title
   attr_accessor :proc
 
@@ -49,13 +137,12 @@ class ItLeaf
   # @param context [String]
   def run_tests(context = nil)
     context = [context, title].compact.join(' ')
-    puts context
     return nil if @proc.nil?
 
-    result = @proc&.call
-    if result == false
-      # raise MatchError, "False result for: #{context}"
-    end
+    result = instance_exec(&@proc)
+    TestManager.instance.add_success(context)
+  rescue ::StandardError => e
+    TestManager.instance.add_failure(context, e)
   end
 
   def describe(described_object)
@@ -121,7 +208,7 @@ class DescribeLeaf
   end
 end
 
-# 1: User instance_exect https://www.codewithjason.com/ruby-instance-exec/
+# 1: Use instance_exect https://www.codewithjason.com/ruby-instance-exec/
 class MiniRSpec
   attr_accessor :ast
 
@@ -153,6 +240,8 @@ class MiniRSpec
   end
 
   def run_tests
+    puts ''
+    TestManager.instance.reset_stat!
     @ast.each do |node|
       if node.is_a?(ItLeaf)
         node.run_tests
@@ -162,6 +251,7 @@ class MiniRSpec
         raise "Undefined node #{node}"
       end
     end
+    TestManager.instance.show_stat
   end
 
   def self.describe(title, &block)
@@ -177,23 +267,23 @@ end
 unit = MiniRSpec.describe 'TestCases' do
   describe 'Describe1' do
     it 'D1-1' do
-      1 + 1
+      expect(1).to eq(1)
     end
     it 'D1-2' do
-      1 + 1
+      expect(1).to eq(1)
     end
   end
 
   describe 'Describe2' do
     it 'D2-1' do
-      1 + 1
+      expect(1).to eq(1)
     end
     it 'D2-2' do
-      1 + 1
+      expect(1).to eq(1)
     end
     describe 'Describe2.1' do
       it 'D2.1-1' do
-        false
+        expect(1).to_not eq(1)
       end
     end
   end
