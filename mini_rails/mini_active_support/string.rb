@@ -52,6 +52,14 @@ module MiniActiveSupport
     def to_json
       self
     end
+
+    def red
+      "\e[31m#{self}\e[0m"
+    end
+
+    def green
+      "\e[32m#{self}\e[0m"
+    end
   end
 end
 
