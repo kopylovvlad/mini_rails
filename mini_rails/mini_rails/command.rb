@@ -30,5 +30,16 @@ module MiniRails
     def server(argv)
       ::MiniRails::LocalServer.start
     end
+
+    # @param argv [Array<String>] List of file pathes
+    def test(argv)
+      argv.each do |file_path|
+        full_path = MiniRails.root.join(file_path)
+        unless File.exist?(full_path)
+          puts "Warning file '#{full_path}' does not exist"
+        end
+        require full_path
+      end
+    end
   end
 end
