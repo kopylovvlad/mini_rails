@@ -6,6 +6,10 @@ module MiniActiveSupport
       size == 0
     end
 
+    def extract_options!
+      last.is_a?(::Hash) ? pop : {}
+    end
+
     def present?
       !empty?
     end
