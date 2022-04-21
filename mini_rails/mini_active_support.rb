@@ -9,6 +9,7 @@ require_relative 'mini_active_support/hash_with_indifferent_access'
 require_relative 'mini_active_support/module'
 require_relative 'mini_active_support/nil_class'
 require_relative 'mini_active_support/numeric'
+require_relative 'mini_active_support/proc'
 require_relative 'mini_active_support/string'
 require_relative 'mini_active_support/true_class'
 
@@ -20,5 +21,6 @@ Hash.send(:prepend, MiniActiveSupport::Hash)
 Module.send(:prepend, MiniActiveSupport::Module)
 NilClass.send(:prepend, MiniActiveSupport::NilClass)
 Numeric.send(:prepend, MiniActiveSupport::Numeric)
+Proc.send(:prepend, MiniActiveSupport::Proc)
 String.send(:prepend, MiniActiveSupport::String)
 TrueClass.send(:prepend, MiniActiveSupport::TrueClass)

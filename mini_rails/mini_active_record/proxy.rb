@@ -42,6 +42,10 @@ module MiniActiveRecord
       driver.count(@where_condition, table_name)
     end
 
+    def present?
+      driver.count(@where_condition, table_name) > 0
+    end
+
     # @param attribute [String, Symbol]
     # @return [Array<Object>]
     def pluck(attribute)
@@ -83,8 +87,9 @@ module MiniActiveRecord
 
     # DB Driver
     def driver
-      _driver = ::MiniRails::Application.config.driver
-      Object.const_get("MiniActiveRecord::#{_driver.to_s.camelize}Driver")
+      # _driver = ::MiniRails::Application.config.driver
+      # Object.const_get("MiniActiveRecord::#{_driver.to_s.camelize}Driver")
+      Base.driver
     end
 
     # Run driver and wrap raw data to model-class

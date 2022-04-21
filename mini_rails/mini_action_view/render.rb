@@ -3,22 +3,19 @@
 module MiniActionView
   module Render
     # @param view_name [String, Symbol]
-    #   Can be: '_header', :header, 'shared_header'
+    #   Can be: '_header', :header, 'shared/header'
     #   For symbol it adds _ in the beggining of name.
     # @param collection [Array<Object>] each item will be passed as 'item' variable
-    # @param item [Object]
-    def render_partial(view_name, collection: [], item: nil)
+    # @param locals [Hash<Symbol,Object>] params to passing data as local_variables
+    def render_partial(view_name, collection: [], locals: {})
       if view_name.is_a?(Symbol)
-        return render_partial("_#{view_name}", collection: collection, item: item)
-      end
-      unless view_name.include?('.html.erb')
-        return render_partial("#{view_name}.html.erb", collection: collection, item: item)
-      end
-
-      if collection.size > 0
-        collection.map { |i| render_view(view_name, item: i) }.join('')
+        render_partial("_#{view_name}", collection: collection, locals: locals)
+      elsif view_name.exclude?('.html.erb')
+        render_partial("#{view_name}.html.erb", collection: collection, locals: locals)
+      elsif collection.size > 0
+        collection.map { |i| render_view(view_name, locals: {item: i}) }.join('')
       else
-        render_view(view_name, item: item)
+        render_view(view_name, locals: locals)
       end
     end
 
@@ -55,14 +52,19 @@ module MiniActionView
 
     # NOTE: If view_name has `/` symbol it searches for a file in app/views folder
     # If view_name hasn't `/` symbol it searches for a file in entity folder
-    def render_view(view_name, item: nil)
+    def render_view(view_name, locals: {})
       root_path = MiniRails.root.join('app', 'views')
       unless view_name.include?('/')
         root_path = root_path.join(entity)
       end
-
       view_path = root_path.join(view_name).to_s
-      ERB.new(read_or_open(view_path)).result(binding)
+
+      # assign data from locals as local variables
+      local_binding = binding
+      locals.each do |key, value|
+        local_binding.local_variable_set(key, value)
+      end
+      ERB.new(read_or_open(view_path)).result(local_binding)
     end
   end
 end

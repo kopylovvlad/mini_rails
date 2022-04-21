@@ -9,7 +9,8 @@ Bundler.require(*MiniRails.groups) if defined?(Bundler)
 
 aliases = {
   "c"  => "console",
-  "s"  => "server"
+  "s"  => "server",
+  "t" => "test"
 }
 
 command = ARGV.shift

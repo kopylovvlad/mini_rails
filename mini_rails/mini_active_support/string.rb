@@ -27,6 +27,10 @@ module MiniActiveSupport
       word
     end
 
+    def exclude?(object)
+      !include?(object)
+    end
+
     def to_bool
       if self == 'true'
         true
@@ -47,6 +51,14 @@ module MiniActiveSupport
     # @return [String]
     def to_json
       self
+    end
+
+    def red
+      "\e[31m#{self}\e[0m"
+    end
+
+    def green
+      "\e[32m#{self}\e[0m"
     end
   end
 end

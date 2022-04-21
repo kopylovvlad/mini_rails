@@ -30,5 +30,11 @@ module MiniRails
     def server(argv)
       ::MiniRails::LocalServer.start
     end
+
+    # @param argv [Array<String>] List of file pathes
+    def test(argv)
+      require_relative 'tester'
+      ::MiniRails::Tester.new.call(argv)
+    end
   end
 end
