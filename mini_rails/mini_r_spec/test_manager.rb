@@ -32,7 +32,7 @@ module MiniRSpec
       failure = @info[:failure].size
       all = success + failure
 
-      puts "Finished: #{all} examples, #{failure} failures"
+      puts "Finished: #{all} examples, #{failure} failures\n\r"
 
       return if failure == 0
 

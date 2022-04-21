@@ -3,7 +3,7 @@
 module MiniRSpec
   # TODO: define xit and xdescribe
   module Context
-    # @described_object [String, Object] Object must respond to method .to_s
+    # @param described_object [String, Object] Object must respond to method .to_s
     # @return [DescribeLeaf]
     def describe(described_object, &block)
       leaf = DescribeLeaf.new(described_object)
@@ -11,7 +11,9 @@ module MiniRSpec
       leaf
     end
 
-    # @described_object [String, Object] Object must respond to method .to_s
+    alias_method :context, :describe
+
+    # @param described_object [String, Object] Object must respond to method .to_s
     # @return [ItLeaf]
     def it(described_object, &block)
       leaf = ItLeaf.new(described_object)

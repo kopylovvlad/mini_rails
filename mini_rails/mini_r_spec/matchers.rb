@@ -2,7 +2,7 @@
 
 module MiniRSpec
   class Matcher
-    def initialize(value)
+    def initialize(value = nil)
       @value = value
     end
 
@@ -60,6 +60,32 @@ module MiniRSpec
       message = "'#{new_value}' is an instance of '#{@value}'"
       raise MatchError, message if a == false
       a
+    end
+  end
+
+  class BePresentMatcher < Matcher
+    def ==(new_value)
+      check_object(new_value)
+      a = new_value.present?
+      message = "'#{new_value}' does not present"
+      raise MatchError, message if a == false
+      a
+    end
+
+    def !=(new_value)
+      check_object(new_value)
+      a = !new_value.present?
+      message = "'#{new_value}' presents"
+      raise MatchError, message if a == false
+      a
+    end
+
+    private
+
+    def check_object(new_value)
+      unless new_value.respond_to?(:present?)
+        raise MatchError, "'#{new_value}' doesn't respond to present?"
+      end
     end
   end
 end

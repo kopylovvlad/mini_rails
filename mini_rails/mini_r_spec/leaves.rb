@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
+require_relative '../mini_factory/shortcuts'
+
 module MiniRSpec
   class ItLeaf
     include Context
+    include ::MiniFactory::Shortcuts
 
     attr_reader :title
     attr_accessor :proc
@@ -16,13 +19,15 @@ module MiniRSpec
       title
     end
 
-    # Как понять сколько было тест кейсов?
-    # Test observer
     # @param context [String]
     def run_tests(context = nil)
       context = [context, title].compact.join(' ')
       return nil if @proc.nil?
 
+      # Clear DB before running the test case
+      ::MiniActiveRecord::Base.driver.destroy_database!
+
+      # Run the test case
       result = instance_exec(&@proc)
       TestManager.instance.add_success(context)
     rescue ::StandardError => e
@@ -32,6 +37,9 @@ module MiniRSpec
     def describe(described_object)
       raise 'Can not use describe inside "it" block'
     end
+
+    # NOTE: Rewrite aliase
+    alias_method :context, :describe
 
     def expect(object)
       Matcher.new(object)
@@ -43,6 +51,10 @@ module MiniRSpec
 
     def be_truthy
       eq(true)
+    end
+
+    def be_present
+      BePresentMatcher.new
     end
 
     def be_falsey
@@ -112,6 +124,9 @@ module MiniRSpec
       @children << leaf
       nil
     end
+
+    # NOTE: Rewrite aliase
+    alias_method :context, :describe
 
     # @described_object [String, Object] Object must respond to method .to_s
     # @return [ItLeaf]
