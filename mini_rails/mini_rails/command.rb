@@ -33,13 +33,8 @@ module MiniRails
 
     # @param argv [Array<String>] List of file pathes
     def test(argv)
-      argv.each do |file_path|
-        full_path = MiniRails.root.join(file_path)
-        unless File.exist?(full_path)
-          puts "Warning file '#{full_path}' does not exist"
-        end
-        require full_path
-      end
+      require_relative 'tester'
+      ::MiniRails::Tester.new.call(argv)
     end
   end
 end

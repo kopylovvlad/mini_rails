@@ -21,6 +21,7 @@ require_relative 'mini_action_view'
 require_relative 'mini_active_record'
 require_relative 'mini_active_router'
 require_relative 'mini_code_loader'
+require_relative 'mini_factory'
 require_relative 'mini_r_spec'
 
 require_relative 'mini_rails/application'
