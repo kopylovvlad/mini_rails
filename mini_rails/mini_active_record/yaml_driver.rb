@@ -5,6 +5,13 @@ module MiniActiveRecord
     class << self
       private
 
+      # NOTE: Delete only test database
+      def _destroy_database!
+        Dir[MiniRails.root.join("db/*_test.yml")].each do |file_path|
+          File.delete(file_path)
+        end
+      end
+
       def _delete_by_id(id, table_name)
         store = init_store(table_name)
         store.transaction do
@@ -63,7 +70,12 @@ module MiniActiveRecord
       end
 
       def init_store(table_name)
-        store = YAML::Store.new("db_#{table_name}.yml")
+        file_path = if MiniRails.env.test?
+                      "db/db_#{table_name}_test.yml"
+                    else
+                      "db/db_#{table_name}.yml"
+                    end
+        store = YAML::Store.new(MiniRails.root.join(file_path).to_s)
         store.transaction do
           store[table_name.to_sym] ||= []
         end

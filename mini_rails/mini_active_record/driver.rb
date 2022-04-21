@@ -3,6 +3,10 @@
 module MiniActiveRecord
   class Driver
     class << self
+      def destroy_database!
+        _destroy_database!
+      end
+
       # @param id [String, Integer]
       # @param table_name [String]
       def delete_by_id(id, table_name)
@@ -47,6 +51,10 @@ module MiniActiveRecord
       end
 
       private
+
+      def _destroy_database!
+        raise NoMethodError
+      end
 
       def _delete_by_id(id, table_name)
         raise NoMethodError
