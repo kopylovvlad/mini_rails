@@ -2,10 +2,12 @@
 
 require_relative 'mini_r_spec/base'
 require_relative 'mini_r_spec/context'
+require_relative 'mini_r_spec/describe_leaf'
+require_relative 'mini_r_spec/it_matchers'
+require_relative 'mini_r_spec/it_leaf'
 require_relative 'mini_r_spec/match_error'
 require_relative 'mini_r_spec/matchers'
 require_relative 'mini_r_spec/test_manager'
-require_relative 'mini_r_spec/leaves'
 
 module MiniRSpec
   def self.describe(title, &block)
