@@ -47,6 +47,13 @@ module MiniActiveRecord
       @errors_object = ::MiniActiveRecord::Validation::Errors.new
     end
 
+    # @param params [Hash<Symbol, Object>]
+    def assign_attributes(params)
+      params.each do |key, value|
+        public_send("#{key}=", value)
+      end
+    end
+
     # @return [Hash<String, Object>]
     def as_json
       available_fields.reduce({}) do |memo, field|
