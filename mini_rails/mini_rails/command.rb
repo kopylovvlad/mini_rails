@@ -34,6 +34,7 @@ module MiniRails
     # @param argv [Array<String>] List of file pathes
     def test(argv)
       require_relative 'tester'
+      require 'rack/test'
       ::MiniRails::Tester.new.call(argv)
     end
   end

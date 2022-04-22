@@ -1,8 +1,9 @@
 PATH
   remote: ../mini_rails
   specs:
-    mini_rails (0.0.1)
+    mini_rails (0.0.2)
       rack
+      rack-test
 
 GEM
   remote: https://rubygems.org/
@@ -28,6 +29,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.3)
+    rack-test (1.1.0)
+      rack (>= 1.0, < 3)
     rainbow (3.1.1)
     regexp_parser (2.2.1)
     reverse_markdown (2.1.1)
