@@ -2,15 +2,19 @@
 
 MiniRSpec.describe 'Group' do
   context 'factory' do
-    it 'works' do
-      group = create(:group)
-      expect(group.id).to be_present
-      expect(group.items).not_to be_present
+    context 'create one item' do
+      let!(:group) { create(:group) }
+
+      it 'works' do
+        expect(group.id).to be_present
+        expect(group.items).not_to be_present
+      end
     end
 
     context 'create few items' do
+      before_each { create_list(:group, 3) }
+
       it 'works' do
-        create_list(:group, 3)
         expect(Group.all.count).to eq(3)
       end
     end
@@ -18,19 +22,21 @@ MiniRSpec.describe 'Group' do
 
   context 'quering' do
     context '#find_by' do
-      it 'find item' do
-        create_list(:group, 2)
-        group = create(:group, title: 'my_group')
-        item = Group.find_by(title: 'my_group')
+      before_each { create_list(:group, 2) }
+      let!(:group) { create(:group, title: 'my_group') }
+      let!(:item) { Group.find_by(title: 'my_group') }
+
+      it 'finds item' do
         expect(item.id).to eq(group.id)
       end
     end
   end
 
   context 'relations' do
+    let!(:group) { create(:group, :with_item) }
+    let!(:items) { create_list(:item, 2, group_id: group.id) }
+
     it 'works' do
-      group = create(:group, :with_item)
-      items = create_list(:item, 2, group_id: group.id)
       expect(group.items.size).to eq(2)
     end
   end
@@ -73,10 +79,11 @@ MiniRSpec.describe 'Group' do
   end
 
   context '#items' do
+    let!(:group1) { create(:group) }
+    let!(:group2) { create(:group) }
+    let!(:items) { create_list(:item, 3, group_id: group1.id) }
+
     it 'returns items' do
-      group1 = create(:group)
-      group2 = create(:group)
-      items = create_list(:item, 3, group_id: group1.id)
       create(:item, group_id: group2.id)
       expect(group1.items.count).to eq(3)
       expect(group2.items.count).to eq(1)

@@ -2,23 +2,28 @@
 
 MiniRSpec.describe 'Item' do
   context 'factories' do
-    it 'works' do
-      item = create(:item)
-      expect(item.id).to be_present
-      expect(item.done).to be_falsey
-      expect(item.group_id).to be_nil
+    context 'one item' do
+      let!(:item) { create(:item) }
+
+      it 'works' do
+        expect(item.id).to be_present
+        expect(item.done).to be_falsey
+        expect(item.group_id).to be_nil
+      end
     end
 
-    context 'done' do
+    context 'done item' do
+      let!(:item) { create(:item, :done) }
+
       it 'works' do
-        item = create(:item, :done)
         expect(item.done).to be_truthy
       end
     end
 
     context 'with group' do
+      let!(:item) { create(:item, :with_group) }
+
       it 'works' do
-        item = create(:item, :with_group)
         expect(item.group_id).to be_present
         expect(item.group).to be_kind_of(::Group)
       end
@@ -43,20 +48,22 @@ MiniRSpec.describe 'Item' do
 
   context 'scopes' do
     describe '.active' do
+      let!(:group) { create(:group) }
+      let!(:active_items) { create_list(:item, 2, group_id: group.id) }
+      let!(:not_active_items) { create_list(:item, 3, :done, group_id: group.id) }
+
       it 'returns active items' do
-        group = create(:group)
-        active_items = create_list(:item, 2, group_id: group.id)
-        not_active_items = create_list(:item, 3, :done, group_id: group.id)
         expect(group.items.count).to eq(5)
         expect(group.items.active.count).to eq(2)
       end
     end
 
     describe '.not_active' do
+      let!(:group) { create(:group) }
+      let!(:active_items) { create_list(:item, 2, group_id: group.id) }
+      let!(:not_active_items) { create_list(:item, 3, :done, group_id: group.id) }
+
       it 'returns not active items' do
-        group = create(:group)
-        active_items = create_list(:item, 2, group_id: group.id)
-        not_active_items = create_list(:item, 3, :done, group_id: group.id)
         expect(group.items.count).to eq(5)
         expect(group.items.not_active.count).to eq(3)
       end
