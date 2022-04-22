@@ -40,7 +40,7 @@ module MiniActionController
     # @option opts [String] :root
     # @return [MiniActionController::Response]
     def render_json(object, opts = {})
-      status = opts[:status] = MiniActionController::DEFAULT_STATUS
+      status = opts[:status] || MiniActionController::DEFAULT_STATUS
       MiniActionView::Json.new(object).render(opts.merge(status: status))
     end
 
