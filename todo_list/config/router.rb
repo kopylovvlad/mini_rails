@@ -10,6 +10,8 @@ MiniActiveRouter::Base.instance.draw do
   # Group scope - JSON
   get '/api/groups', to: 'api/groups#index'
   get '/api/groups/:id', to: 'api/groups#show'
+  post '/api/groups', to: 'api/groups#create'
+  patch '/api/groups/:id', to: 'api/groups#update'
 
   # Items scope - HTML
   get '/groups/:group_id/items', to: 'items#index'
