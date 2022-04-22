@@ -7,16 +7,16 @@ module MiniRSpec
     # @return [DescribeLeaf]
     def describe(described_object, &block)
       leaf = DescribeLeaf.new(described_object)
-      leaf.instance_exec(&block)
+      leaf.instance_exec(&block) if block_given?
       leaf
     end
 
     alias_method :context, :describe
 
     # @param described_object [String, Object] Object must respond to method .to_s
-    # @return [ItLeaf]
+    # @return [ItLeaf::Base]
     def it(described_object, &block)
-      leaf = ItLeaf.new(described_object)
+      leaf = ItLeaf::Base.new(described_object)
       leaf.proc = block
       leaf
     end

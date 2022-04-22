@@ -3,7 +3,6 @@
 require_relative 'mini_r_spec/base'
 require_relative 'mini_r_spec/context'
 require_relative 'mini_r_spec/describe_leaf'
-require_relative 'mini_r_spec/it_matchers'
 require_relative 'mini_r_spec/it_leaf'
 require_relative 'mini_r_spec/match_error'
 require_relative 'mini_r_spec/matchers'

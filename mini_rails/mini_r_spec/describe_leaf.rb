@@ -17,7 +17,7 @@ module MiniRSpec
     def show_title
       titles = []
       children.each do |node|
-        if node.is_a?(ItLeaf)
+        if node.is_a?(ItLeaf::Base)
           titles << node.show_title
         elsif node.is_a?(DescribeLeaf)
           node.show_title.each do |str|
@@ -49,7 +49,7 @@ module MiniRSpec
       merged_variables = variables.merge(@variables)
 
       children.each do |node|
-        if node.is_a?(ItLeaf)
+        if node.is_a?(ItLeaf::Base)
           node.run_tests(context, merged_callbacks, merged_variables)
         elsif node.is_a?(DescribeLeaf)
           node.run_tests(context, merged_callbacks, merged_variables)
@@ -71,8 +71,8 @@ module MiniRSpec
     alias_method :context, :describe
 
     # @described_object [String, Object] Object must respond to method .to_s
-    # @return [ItLeaf]
-    def it(described_object, &block)
+    # @return [ItLeaf::Base]
+    def it(described_object = '', &block)
       leaf = super
       @children << leaf
       nil

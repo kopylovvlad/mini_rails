@@ -88,4 +88,20 @@ module MiniRSpec
       end
     end
   end
+
+  class HaveHttpStatusMatcher < Matcher
+    def ==(new_value)
+      a = new_value.status == @value
+      message = "'#{new_value.status}' doesn't equal to #{@value}"
+      raise MatchError, message if a == false
+      a
+    end
+
+    def !=(new_value)
+      a = new_value.status != @value
+      message = "'#{new_value.status}' equals to #{@value}"
+      raise MatchError, message if a == false
+      a
+    end
+  end
 end

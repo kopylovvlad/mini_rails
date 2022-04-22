@@ -18,7 +18,7 @@ module MiniRSpec
     def print_cases
       titles = []
       @ast.each do |node|
-        if node.is_a?(ItLeaf)
+        if node.is_a?(ItLeaf::Base)
           titles << node.show_title
         elsif node.is_a?(DescribeLeaf)
           node.show_title.each do |title|
@@ -35,7 +35,7 @@ module MiniRSpec
       puts ''
       TestManager.instance.reset_stat!
       @ast.each do |node|
-        if node.is_a?(ItLeaf)
+        if node.is_a?(ItLeaf::Base)
           node.run_tests
         elsif node.is_a?(DescribeLeaf)
           node.run_tests
