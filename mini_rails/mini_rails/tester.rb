@@ -23,7 +23,7 @@ module MiniRails
           puts "Warning file '#{full_path}' does not exist"
         end
         short_path = file_path.gsub(/^.*\/spec\//, '/spec/')
-        puts "Running test cases for '#{file_path}'"
+        puts "Running test cases for '#{short_path}'"
         require full_path
       end
 
