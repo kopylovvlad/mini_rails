@@ -19,6 +19,7 @@ class ItemsController < ApplicationController
     end
   end
 
+  # TODO: write test
   def update
     @item.done = params[:done]
     @item.save
