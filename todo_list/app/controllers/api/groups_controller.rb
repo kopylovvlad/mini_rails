@@ -3,7 +3,7 @@
 module Api
   class GroupsController < ::Api::ApplicationController
     before_action :groups, only: [:index]
-    before_action :group, only: [:show, :update]
+    before_action :group, only: [:show, :update, :destroy]
 
     def index
       render_json(@groups, each_serializer: GroupSerializer)
@@ -31,6 +31,12 @@ module Api
         render_json({ errors: @group.errors.full_messages },
                       status: "422 Unprocessable Entity")
       end
+    end
+
+    def destroy
+      @group.items.map(&:destroy)
+      @group.destroy
+      render_json({})
     end
 
     private

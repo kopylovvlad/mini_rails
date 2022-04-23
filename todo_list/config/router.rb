@@ -12,6 +12,7 @@ MiniActiveRouter::Base.instance.draw do
   get '/api/groups/:id', to: 'api/groups#show'
   post '/api/groups', to: 'api/groups#create'
   patch '/api/groups/:id', to: 'api/groups#update'
+  delete '/api/groups/:id', to: 'api/groups#destroy'
 
   # Items scope - HTML
   get '/groups/:group_id/items', to: 'items#index'
@@ -21,7 +22,10 @@ MiniActiveRouter::Base.instance.draw do
 
   # Items scope - JSON
   get '/api/groups/:group_id/items', to: 'api/items#index'
+  post '/api/groups/:group_id/items', to: 'api/items#create'
   get '/api/groups/:group_id/items/:id', to: 'api/items#show'
+  patch '/api/groups/:group_id/items/:id', to: 'api/items#update'
+  delete '/api/groups/:group_id/items/:id', to: 'api/items#destroy'
 
   not_found to: 'not_found#index'
 end
