@@ -37,6 +37,7 @@ module MiniActionController
         !@unless.nil?
       end
 
+      # @param action [String, Symbol] Name of controller's action
       def match_for?(action)
         return true if without_name_conditions?
         return true if @only.present? && @only.include?(action.to_sym)

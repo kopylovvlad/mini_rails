@@ -3,6 +3,8 @@
 require_relative 'callbacks/callback'
 
 module MiniActionController
+  # Module with logic for controller callbacks
+  # Supports only before_action callback
   module Callbacks
     def self.included(base)
       base.class_attribute :callbacks

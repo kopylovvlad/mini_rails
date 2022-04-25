@@ -14,9 +14,12 @@ module MiniActionController
     # @param controler_method_name [String, Symbol]
     def build_response(controler_method_name)
       begin
+        # 1: Run all callbacks
         run_callbacks_for(controler_method_name.to_sym)
+        # 2: Run the controller action
         response = public_send(controler_method_name)
       rescue StandardError => e
+        # 3: If there is an exception, try to find :rescue_from handler
         response = try_to_rescue(e)
       end
       build_rack_response(response)

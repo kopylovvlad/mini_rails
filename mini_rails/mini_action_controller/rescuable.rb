@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module MiniActionController
+  # Module with rescue_from logic
   module Rescuable
     def self.included(base)
       base.class_attribute :rescue_attempts

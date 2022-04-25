@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module MiniActionController
+  # An value object
   class Response
     attr_reader :status, :response_message, :content_type, :headers
 

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module MiniActionController
+  # Class for wrapping rack params
+  # You can use it as 'param' method in a controller
   class Parameters
     def initialize(raw_params = {})
       @hash = ::MiniActiveSupport::HashWithIndifferentAccess.new(raw_params)

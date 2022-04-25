@@ -3,6 +3,12 @@
 module MiniActionController
   module Render
     def self.included(base)
+      # @!method layout
+      # It sets layout for the view
+      # Example of usage:
+      # layout :not_found # It requires file /app/views/layouts/not_found.html.erb
+      # Be default layout :application
+      # It requires file /app/views/layouts/application.html.erb
       base.class_attribute :layout
       base.layout = :application
 
