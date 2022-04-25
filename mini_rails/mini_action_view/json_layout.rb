@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# TODO: yard
 module MiniActionView
   class JsonLayout
     # @param response [MiniActionController::Response]

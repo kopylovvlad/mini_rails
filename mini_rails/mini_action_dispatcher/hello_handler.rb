@@ -9,7 +9,6 @@ module MiniActionDispatch
 
     private
 
-    # TODO: add more info
     def body
       <<~MGG
         <h1>Hello to Ruby on MiniRails</h1>

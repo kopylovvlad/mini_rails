@@ -2,7 +2,6 @@
 
 module MiniActiveRecord
   class Serializer
-    # TODO: add yard
     attr_reader :object
 
     class_attribute :fields_to_serialize

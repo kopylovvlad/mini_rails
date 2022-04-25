@@ -19,7 +19,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  # TODO: write test
   def update
     @item.done = params[:done]
     @item.save
@@ -39,7 +38,7 @@ class ItemsController < ApplicationController
   end
 
   def find_item
-    @item = Item.find_by(group_id: params[:group_id], id: params[:id])
+    @item = Item.find_by!(group_id: params[:group_id], id: params[:id])
   end
 
   def permited_params

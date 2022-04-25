@@ -14,7 +14,6 @@ module MiniRails
       env == 'development'
     end
 
-    # TODO: Add test env
     def production?
       env == 'production'
     end
