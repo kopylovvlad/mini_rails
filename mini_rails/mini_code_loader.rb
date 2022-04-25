@@ -2,7 +2,6 @@
 
  # Note: Here is code reloading logic
  # It works only in development env
- # TODO: check
  class MiniCodeLoader
   def initialize
     @application = MiniRails::Application.descendants.first
@@ -15,32 +14,6 @@
       end
     end
   end
-
-  # def check_updates!
-  #   return false unless MiniRails.env.development?
-
-  #   files_to_update = []
-  #   # Collect files with old timestamp
-  #   @typestamps.each do |file_path, timestamp|
-  #     current_timestamp = File.mtime(file_path)
-  #     next if timestamp == current_timestamp
-
-  #     files_to_update << file_path
-  #     @typestamps[file_path] = current_timestamp
-  #   end
-  #   return false if files_to_update.size == 0
-
-  #   files_to_update.each do |file_path|
-  #     # Delete full path from file path. Leave only file name
-  #     load_paths = @application.config.load_paths
-  #     file_name = load_paths.reduce(file_path) do |file_path, path|
-  #       file_path.gsub(MiniRails.root.join("#{path}/").to_s, '')
-  #     end
-  #     self.class.delete_const(file_name)
-  #     load(file_path)
-  #   end
-  #   true
-  # end
 
   # NOTE: Force reload all code with constants
   def self.reload!
