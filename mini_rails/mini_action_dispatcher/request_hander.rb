@@ -28,7 +28,7 @@ module MiniActionDispatch
         method_token = params[:_method].upcase
       end
 
-      puts "✅ Приняли запрос с методом #{method_token} на ручку #{path} с параметрами '#{path_params}'" unless ::MiniRails.env.test?
+      puts "✅ Receive request #{method_token} to path #{path} with params '#{path_params}'" unless ::MiniRails.env.test?
 
       # Route's placeholder support
       selected_route = MiniActiveRouter::Base.instance.find(method_token, path)
@@ -37,7 +37,7 @@ module MiniActionDispatch
       params = params.merge(placeholders)
 
       unless ::MiniRails.env.test?
-        puts "Его обработает #{controller_name.camelize}##{controler_method_name} ..."
+        puts "The handler is #{controller_name.camelize}##{controler_method_name} ..."
       end
 
       # Decide what to respond

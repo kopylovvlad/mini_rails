@@ -18,8 +18,8 @@ module MiniActionDispatch
     def attempt(env)
       request = Rack::Request.new(env)
       if valid_request?(request) && file_exist?(request)
-        puts "✅ Приняли запрос с методом #{request.request_method} на ручку #{request.path_info}"
-        puts "Его обработает MiniActionDispatch::StaticHandler ..."
+        puts "✅ Receive request #{request.request_method} to #{request.path_info}"
+        puts "The handler is MiniActionDispatch::StaticHandler ..."
         return Rack::Files.new('public').call(env)
       end
       nil
