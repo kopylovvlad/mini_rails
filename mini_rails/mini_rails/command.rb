@@ -20,17 +20,20 @@ module MiniRails
       @application.load_code
     end
 
+    # MiniRails console
     # @param argv [Array<String>]
     def console(argv)
       require "irb"
       IRB.start(__FILE__)
     end
 
+    # MiniRails server
     # @param argv [Array<String>]
     def server(argv)
       ::MiniRails::LocalServer.start
     end
 
+    # Run tests
     # @param argv [Array<String>] List of file pathes
     def test(argv)
       require_relative 'tester'

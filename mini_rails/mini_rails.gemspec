@@ -2,7 +2,7 @@ $:.push File.expand_path("../", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = 'mini_rails'
-  s.version     = '0.0.2'
+  s.version     = '0.0.3'
   s.date        = '2020-04-04'
   s.summary     = 'MiniRails'
   s.description = 'MiniRails'

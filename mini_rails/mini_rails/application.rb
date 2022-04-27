@@ -11,7 +11,7 @@ module MiniRails
       middlewares << ::MiniActionDispatch::StaticHandler
       middlewares << ::MiniActionDispatch::AssetHandler
 
-      # Middlewares for development end
+      # Middlewares for development env
       middlewares << Rack::Reloader if ::MiniRails.env.development?
 
       base = ::MiniActionDispatch::HelloHandler.new
