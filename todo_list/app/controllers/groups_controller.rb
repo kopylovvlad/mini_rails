@@ -7,7 +7,7 @@ class GroupsController < ApplicationController
       redirect_to '/'
     else
       @alert = @group.errors.full_messages.join(', ')
-      render :new, status: "422 Unprocessable Entity"
+      render :new, status: '422 Unprocessable Entity'
     end
   end
 

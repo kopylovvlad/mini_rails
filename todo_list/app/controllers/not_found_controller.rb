@@ -2,6 +2,6 @@
 
 class NotFoundController < ApplicationController
   def index
-    render :index, status: "404 Not Found"
+    render :index, status: '404 Not Found'
   end
 end

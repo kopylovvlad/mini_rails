@@ -17,10 +17,10 @@ module Api
     def create
       @item = Item.new(permited_params)
       if @item.save
-        render_json(@item, status: "201 Created")
+        render_json(@item, status: '201 Created')
       else
         render_json({ errors: @item.errors.full_messages },
-                      status: "422 Unprocessable Entity")
+                      status: '422 Unprocessable Entity')
       end
     end
 
@@ -30,7 +30,7 @@ module Api
         render_json(@item)
       else
         render_json({ errors: @item.errors.full_messages },
-                      status: "422 Unprocessable Entity")
+                      status: '422 Unprocessable Entity')
       end
     end
 
