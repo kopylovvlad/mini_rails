@@ -2,6 +2,7 @@
 
 module MiniRails
   # TODO: Implement 'new' command
+  # TODO: Implement runner
   class Command
     # @param command [String]
     # @param argv [Array<String>]
