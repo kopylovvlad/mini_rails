@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module MiniActionView
+  # NOTE: Object to store cache for different views.
   class Cache
     include ::Singleton
 

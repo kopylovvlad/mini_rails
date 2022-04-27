@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
-# TODO: yard
 module MiniActionView
+  # Note: Class to render layout for views.
+  # ERB-file that contains layout-template must be in app/views/layouts/ folder
+  # For example 'app/views/layouts/application.html.erb'
   class Layout < ::MiniActionView::Base
-
+    # @param layout [String, Symbol]
     # @param response [MiniActionController::Response]
     def render_response(layout, response)
       status_code, _status_text = response.status.split(' ')

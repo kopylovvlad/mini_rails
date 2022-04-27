@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module MiniActionView
+  # NOTE: Module with logic how to read file and store data into cache
   module Reader
     private
 
