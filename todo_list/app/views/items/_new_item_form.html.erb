@@ -2,11 +2,11 @@
   <div class="col">
     <form action="/groups/<%= @group.id %>/items" method="post" enctype="application/x-www-form-urlencoded">
       <div class="mb-1">
-        <label for="item_name_main">Добавь план на день</label>
+        <label for="item_name_main">Create new item</label>
         <input type="text" class="form-control" id="item_name_main" name="title" placeholder="Писать сюда..." value="<%= item.title %>">
       </div>
       <div class="mb-3">
-        <button type="submit" class="btn btn-primary btn-sm">Добавить</button>
+        <button type="submit" class="btn btn-primary btn-sm">Create</button>
       </div>
     </form>
   </div>

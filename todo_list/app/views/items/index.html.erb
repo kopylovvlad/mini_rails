@@ -1,13 +1,13 @@
 <div class="row mb-5">
   <div class="col-sm-6">
-    <h3>Лист: <%= @group.title %></h3>
-    <small>Описание: <%= @group.description %></small><br/>
-    <small>Всего задач: <%= @group.items.count %></small><br/>
-    <small>Активных задач: <%= @group.items.active.count %></small><br/>
-    <small>Задач выполнено: <%= @group.items.not_active.count %></small><br/>
+    <h3>List: <%= @group.title %></h3>
+    <small>Description: <%= @group.description %></small><br/>
+    <small>Items count: <%= @group.items.count %></small><br/>
+    <small>Active items: <%= @group.items.active.count %></small><br/>
+    <small>Done: <%= @group.items.not_active.count %></small><br/>
     <form action="/groups/<%= @group.id %>" method="post" enctype="application/x-www-form-urlencoded" class="mt-2">
       <input type="hidden" name="_method" value="DELETE">
-      <button class="btn btn-danger btn-sm">удалить список</button>
+      <button class="btn btn-danger btn-sm">delete list</button>
     </form>
   </div>
 </div>
@@ -20,7 +20,7 @@
       <% if @items.size > 0 %>
         <%= render_partial :list_item, collection: @items %>
       <% else %>
-        <li class="list-group-item">Данных нет. Пожалуйста добавьте данные в лист</li>
+        <li class="list-group-item">Not data. Please, add new items</li>
       <% end %>
     </ul>
   </div>
@@ -30,7 +30,7 @@
 
 <div class="row mt-4">
   <div class="col">
-    <a href="/">Вернутся на главную</a>
+    <a href="/">Go to root page</a>
   </div>
   <div class="col">
   </div>

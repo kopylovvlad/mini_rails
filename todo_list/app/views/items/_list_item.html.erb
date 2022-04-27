@@ -9,20 +9,20 @@
         <form action="/groups/<%= @group.id %>/items/<%= item.id %>" method="post" enctype="application/x-www-form-urlencoded">
           <input type="hidden" name="_method" value="PATCH">
           <input type="hidden" name="done" value="true">
-          <button class="btn btn-info btn-sm">Деактивировать</button>
+          <button class="btn btn-info btn-sm">Deactivate</button>
         </form>
       <% else %>
         <form action="/groups/<%= @group.id %>/items/<%= item.id %>" method="post" enctype="application/x-www-form-urlencoded">
           <input type="hidden" name="_method" value="PATCH">
           <input type="hidden" name="done" value="false">
-          <button class="btn btn-info btn-sm">Активировать</button>
+          <button class="btn btn-info btn-sm">Activate</button>
         </form>
       <% end %>
 
       <!-- Delete form -->
       <form action="/groups/<%= @group.id %>/items/<%= item.id %>" method="post" enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="_method" value="DELETE">
-        <button class="btn btn-danger btn-sm" type="submit">Удалить пункт</button>
+        <button class="btn btn-danger btn-sm" type="submit">Delete</button>
       </form>
     </div>
   </div>
