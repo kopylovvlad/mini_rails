@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'mini_rails'
+require 'mini_rails/command'
+require './config/application'
+
+Bundler.require(*MiniRails.groups) if defined?(Bundler)
+
+aliases = {
+  "c"  => "console",
+  "s"  => "server",
+  "t" => "test",
+}
+
+command = ARGV.shift
+command = aliases[command] || command
+
+MiniRails::Command.invoke command, ARGV
