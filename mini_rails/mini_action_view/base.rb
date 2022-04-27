@@ -10,9 +10,9 @@ module MiniActionView
     class_attribute :entity
     entity = nil
 
-    # @params variables [Hash<Symbol, Object>]
-    # @params layout [String, Symbol]
-    # @params entity [String, Symbol]
+    # @param variables [Hash<Symbol, Object>]
+    # @param layout [String, Symbol]
+    # @param entity [String, Symbol]
     def initialize(variables, entity)
       variables.each do |key, value|
         instance_variable_set(key, value)
