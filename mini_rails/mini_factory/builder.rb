@@ -13,11 +13,6 @@ module MiniFactory
       @traits = {}
     end
 
-    # @param attr_name [String, Symbol]
-    def sequence(attr_name, &block)
-      @sequences[attr_name.to_sym] = block
-    end
-
     # @param number [Integer] Params for sequences
     # @param selected_traits [Array<Symbol>]
     # @param opts [Hash<Symbol, Object>]
@@ -62,6 +57,8 @@ module MiniFactory
       build(number, opts).save!
     end
 
+    # Example of usage:
+    # senquence(:title) { |i| "My title ##{i}" }
     # @param attr_name [String, Symbol]
     def sequence(attr_name, &block)
       @attributes[attr_name.to_sym] = {

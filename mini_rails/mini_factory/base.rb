@@ -5,7 +5,7 @@ module MiniFactory
     include Singleton
 
     def initialize
-      @factories = {}
+      @factories = {} # Hash to store data about all factories
     end
 
     # @param factory_name [String, Symbol]
@@ -20,6 +20,7 @@ module MiniFactory
       nil
     end
 
+    # NOTE: Did we define a factory ?
     # @param factory_name [String, Symbol]
     def factory?(factory_name)
       @factories.key?(factory_name.to_sym)
