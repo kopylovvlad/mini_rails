@@ -2,6 +2,8 @@
 
 module MiniRSpec
   module ItLeaf
+    # NOTE: Here is methods for matching inside 'it' block
+    # For ex: expect(1).to eq(1)
     module Matchers
       def expect(object)
         Matcher.new(object)

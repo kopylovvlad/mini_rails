@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module MiniRSpec
+  # NOTE: Class to collect data about success and failure test cases
   class TestManager
     include ::Singleton
 

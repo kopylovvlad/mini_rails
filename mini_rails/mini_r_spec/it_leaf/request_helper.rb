@@ -4,6 +4,7 @@ require "rack/test"
 
 module MiniRSpec
   module ItLeaf
+    # NOTE: There are helpers for request tests
     module RequestHelper
       include ::Rack::Test::Methods
 

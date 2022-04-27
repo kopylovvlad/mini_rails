@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 module MiniRSpec
+  # NOTE: Mathcer object
+  # Under the hood expect(1).to eq(1) is EqMatcher.new(1) == Matcher(1)
+  # expect(1).not_to eq(2) is EqMatcher.new(2) != Matcher(1)
+  # expect(1).to be_present is BePresentMatcher.new == Mather(1)
   class Matcher
     def initialize(value = nil)
       @value = value
