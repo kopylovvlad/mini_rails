@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module MiniActiveRecord
+  # NOTE: Module with data manipulation logic
   module Operate
     def self.included(base)
       base.extend ClassMethods

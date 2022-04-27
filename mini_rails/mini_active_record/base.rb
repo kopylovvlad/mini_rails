@@ -10,6 +10,7 @@ module MiniActiveRecord
     extend Association
     extend Relation
 
+    # NOTE: Generate a proxy class dynamically while it's inherited
     def self.inherited(base)
       # Create proxy class for the model
       proxy_class = Class.new(::MiniActiveRecord::Proxy)

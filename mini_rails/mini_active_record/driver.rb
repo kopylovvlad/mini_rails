@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module MiniActiveRecord
+  # NOTE: Abstract class.
+  # Inherite from the class in order to implement a driver for different DBs.
   class Driver
     class << self
       def destroy_database!

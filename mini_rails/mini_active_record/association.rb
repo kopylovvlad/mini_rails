@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module MiniActiveRecord
+  # NOTE: Module with assiciation logic, such as: has_many, belongs_to, etc.
+  # TODO: Implement has_one method
   module Association
     # Example of usage: has_many :items
     # It will create method .items

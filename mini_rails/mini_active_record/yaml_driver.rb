@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module MiniActiveRecord
+  # NOTE: Driver for YAML-file local data storage
   class YamlDriver < Driver
     class << self
       private

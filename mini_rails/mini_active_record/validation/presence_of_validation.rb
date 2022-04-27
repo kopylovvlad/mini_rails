@@ -2,6 +2,7 @@
 
 module MiniActiveRecord
   module Validation
+    # NOTE: Validation class that checks existence of a value
     class PresenceOfValidation < BaseValidation
       def call
         value = object.public_send(field_name)

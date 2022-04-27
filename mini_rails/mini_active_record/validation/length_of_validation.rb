@@ -2,6 +2,7 @@
 
 module MiniActiveRecord
   module Validation
+    # NOTE: Validation class that checks string length
     class LengthOfValidation < BaseValidation
       def call
         value = object.public_send(field_name)
