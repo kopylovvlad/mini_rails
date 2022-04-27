@@ -41,5 +41,20 @@ module MiniRails
       require 'rack/test'
       ::MiniRails::Tester.new.call(argv)
     end
+
+    # Runner to run code from one file or a string
+    def runner(argv)
+      string = argv.pop
+      if string.end_with?('.rb')
+        file_path = MiniRails.root.join(string)
+        if File.exist?(file_path)
+          require file_path
+        else
+          raise "ERROR: file '#{string}' does not exist"
+        end
+      else
+        eval(string)
+      end
+    end
   end
 end
