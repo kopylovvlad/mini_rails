@@ -47,6 +47,10 @@ MiniRSpec.describe 'Item' do
   end
 
   context 'scopes' do
+    it 'returns MiniActiveRecord::Proxy' do
+      expect(Item.all).to be_kind_of(::MiniActiveRecord::ItemProxy)
+    end
+
     describe '.active' do
       let!(:group) { create(:group) }
       let!(:active_items) { create_list(:item, 2, group_id: group.id) }

@@ -21,6 +21,10 @@ MiniRSpec.describe 'Group' do
   end
 
   context 'quering' do
+    it 'returns MiniActiveRecord::Proxy' do
+      expect(Group.all).to be_kind_of(::MiniActiveRecord::GroupProxy)
+    end
+
     context '#find_by' do
       before_each { create_list(:group, 2) }
       let!(:group) { create(:group, title: 'my_group') }
