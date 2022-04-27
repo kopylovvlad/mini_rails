@@ -26,7 +26,7 @@ MiniRSpec.describe 'Group' do
       end
 
       it 'renders 404' do
-        expect(response.body).to include('Страница не найдена')
+        expect(response.body).to include('Not found. 404')
       end
     end
   end

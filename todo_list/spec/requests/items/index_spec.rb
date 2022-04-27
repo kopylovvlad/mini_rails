@@ -21,7 +21,7 @@ MiniRSpec.describe 'Items' do
       it { expect(response).to have_http_status(200) }
 
       it 'renders a stub' do
-        expect(response.body).to include('Данных нет. Пожалуйста добавьте данные в лист')
+        expect(response.body).to include('Not data. Please, add new items')
       end
     end
 
@@ -30,7 +30,7 @@ MiniRSpec.describe 'Items' do
 
       it { expect(response).to have_http_status(404) }
       it 'renders 404 page' do
-        expect(response.body).to include('Страница не найдена')
+        expect(response.body).to include('Not found. 404')
       end
     end
   end

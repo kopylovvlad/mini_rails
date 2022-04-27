@@ -13,7 +13,7 @@ MiniRSpec.describe 'Home' do
       it 'renders group titles' do
         expect(response.body).to include(group1.title)
         expect(response.body).to include(group2.title)
-        expect(response.body).not_to include('У вас нет список задач')
+        expect(response.body).not_to include("You don't have any TODO list")
       end
     end
 
@@ -21,7 +21,7 @@ MiniRSpec.describe 'Home' do
       it { expect(response).to have_http_status(200) }
 
       it 'renders a stub' do
-        expect(response.body).to include('У вас нет список задач')
+        expect(response.body).to include("You don't have any TODO list")
       end
     end
   end

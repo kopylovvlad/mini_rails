@@ -21,7 +21,7 @@ MiniRSpec.describe 'Items' do
 
       it 'renders 404' do
         expect(response).to have_http_status(404)
-        expect(response.body).to include('Страница не найдена')
+        expect(response.body).to include('Not found. 404')
       end
     end
 
@@ -31,7 +31,7 @@ MiniRSpec.describe 'Items' do
 
       it 'renders 404' do
         expect(response).to have_http_status(404)
-        expect(response.body).to include('Страница не найдена')
+        expect(response.body).to include('Not found. 404')
       end
     end
   end
