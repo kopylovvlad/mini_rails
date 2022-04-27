@@ -9,10 +9,13 @@ module MiniActiveRouter
       @fallback_route = nil
     end
 
+    # NOTE: Do we have any route in the route map
     def any?
       @map.size > 0
     end
 
+    # NOTE: Method for drawing routes map
+    # Use it in config/router.rb file
     def draw(&block)
       instance_eval &block
     end
@@ -47,6 +50,7 @@ module MiniActiveRouter
       write_to_map('PATCH', path, **arg)
     end
 
+    # NOTE: Method for set a route for 404 page
     def not_found(to: )
       @fallback_route = Route.new(nil, nil, to: to)
     end
