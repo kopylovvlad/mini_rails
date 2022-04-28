@@ -39,13 +39,24 @@ bundle install
 
 # How to create new app
 
+```bash
+# Create new app
+./mini_rails/bin/mini_rails new <NEW_APP_NAME>
+# Done! Your application in '/Users/vladislavkopylov/Documents/ruby_scripts/maple_ong/ruby_web2/<NEW_APP_NAME>' folder
+
+# Switch to folder
+cd <NEW_APP_NAME>
+bundle install
+
+# Run the server
+./bin/mini_rails server
+# Open http://0.0.0.0:9292 in a browser
+# Now, you can write your own application
+```
+
 Добавить:
 
-* yard
-* Implement rspec
-* Implement factories
 * Write readme.md
-* Add minirails new CLI command
 * Implement handlers for <form> such as: form_with, form.label, etc
 * Implement handles for quick link creating
 * Выложить парням с пометкой PS ищу работу!
