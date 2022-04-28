@@ -6,6 +6,10 @@ module MiniActiveSupport
       false
     end
 
+    def empty?
+      true
+    end
+
     # @return [NilClass]
     def as_json
       self

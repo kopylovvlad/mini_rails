@@ -43,6 +43,10 @@ module MiniActiveSupport
       self.size > 0
     end
 
+    def empty?
+      !present?
+    end
+
     # @return [String]
     def as_json
       self

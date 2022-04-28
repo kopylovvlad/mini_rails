@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'date'
+
 require_relative 'mini_active_support/array'
 require_relative 'mini_active_support/class'
 require_relative 'mini_active_support/date_time'
