@@ -1,7 +1,8 @@
 PATH
   remote: ../mini_rails
   specs:
-    mini_rails (0.0.2)
+    mini_rails (0.0.3)
+      puma
       rack
       rack-test
 
@@ -76,7 +77,6 @@ PLATFORMS
 DEPENDENCIES
   byebug
   mini_rails!
-  puma
   rubocop
   solargraph
 

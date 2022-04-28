@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 ruby '3.0.1'
 
 gem 'mini_rails', :path => '../mini_rails'
-gem 'puma'
 
 group :development do
   gem 'byebug'
