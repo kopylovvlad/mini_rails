@@ -6,6 +6,7 @@ class Item < MiniActiveRecord::Base
   attribute :done, type: [TrueClass, FalseClass], default: false
 
   validates :title, presence: true, length: { max: 100, min: 3 }
+  validates :group_id, presence: true
 
   belongs_to :group
 

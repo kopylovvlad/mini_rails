@@ -18,7 +18,7 @@ MiniRSpec.describe 'Api::Item' do
 
     context 'fake group id' do
       let!(:group) { build(:group, id: '123') }
-      let!(:item) { create(:item) }
+      let!(:item) { create(:item, :with_group) }
 
       it { expect(response).to have_http_status(404) }
       it do

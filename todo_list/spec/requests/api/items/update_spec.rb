@@ -28,7 +28,7 @@ MiniRSpec.describe 'Api::Item' do
 
     context 'invalid group ID' do
       let!(:group) { build(:group, id: '123') }
-      let!(:item) { create(:item) }
+      let!(:item) { create(:item, :with_group) }
 
       it 'returns 404' do
         expect(response).to have_http_status(404)

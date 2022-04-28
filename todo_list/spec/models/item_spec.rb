@@ -3,20 +3,21 @@
 MiniRSpec.describe 'Item' do
   context 'factories' do
     context 'one item' do
-      let!(:item) { create(:item) }
+      let!(:item) { create(:item, :with_group) }
 
       it 'works' do
         expect(item.id).to be_present
         expect(item.done).to be_falsey
-        expect(item.group_id).to be_nil
+        expect(item.group_id).to be_present
       end
     end
 
     context 'done item' do
-      let!(:item) { create(:item, :done) }
+      let!(:item) { create(:item, :with_group, :done) }
 
       it 'works' do
         expect(item.done).to be_truthy
+        expect(item.group_id).to be_present
       end
     end
 
@@ -31,6 +32,15 @@ MiniRSpec.describe 'Item' do
   end
 
   context 'validation' do
+    context 'without group_id' do
+      let!(:item) { build(:item, group_id: nil) }
+
+      it 'is invalid' do
+        expect(item.valid?).to eq(false)
+        expect(item.errors[:group_id]).to include('must be present')
+      end
+    end
+
     describe '#title' do
       it "can't be less then 3" do
         item = build(:item, title: '1')
