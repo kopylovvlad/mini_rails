@@ -76,7 +76,11 @@ module MiniActiveRecord
                     else
                       "db/db_#{table_name}.yml"
                     end
-        store = YAML::Store.new(MiniRails.root.join(file_path).to_s)
+        full_file_path = MiniRails.root.join(file_path).to_s
+        unless File.exist?(full_file_path)
+          File.new(full_file_path, 'w')
+        end
+        store = YAML::Store.new(full_file_path)
         store.transaction do
           store[table_name.to_sym] ||= []
         end
