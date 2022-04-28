@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/kopylovvlad/'
   s.license     = 'MIT'
   s.files       = `git ls-files`.split("\n")
+  s.add_dependency('puma')
   s.add_dependency('rack')
   s.add_dependency('rack-test')
 end
