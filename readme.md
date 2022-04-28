@@ -6,6 +6,39 @@ https://guides.rubyonrails.org/routing.html
 
 Proof of Work version from scratch
 
+# How to start
+
+```bash
+# Clone the project
+git clone git@github.com:kopylovvlad/mini_rails.git
+# Install dependencies
+cd mini_rails
+bundle install
+# Return back
+cd ../
+```
+
+# How to run first app
+
+```bash
+# Switch to application folder
+cd todo_list
+# Install dependencies
+bundle install
+
+# Run the server
+./bin/mini_rails server
+# Open http://0.0.0.0:9292 in a browser
+
+# Run the console
+./bin/mini_rails console
+
+# Run the tests
+./bin/mini_rails test
+```
+
+# How to create new app
+
 Добавить:
 
 * yard
