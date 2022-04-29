@@ -16,13 +16,15 @@ module MiniRails
       factories.each { |file_path| require file_path }
 
       # 3: Require each test file
-      files = if argv.present? &&
+      files = if argv.present?
         paths = argv.map do |str|
-          str.end_with?('.rb') ? str : "#{str}*"
+          str.end_with?('.rb') ? str : "#{str}**/*.rb"
         end
-        Dir[*paths]
+        paths.map do |path|
+          Dir.glob(MiniRails.root.join(path))
+        end.reduce(:+)
       else
-        Dir[MiniRails.root.join("spec/**/*_spec.rb")]
+        Dir.glob(MiniRails.root.join("spec/**/*_spec.rb"))
       end
 
       files.each do |file_path|
@@ -30,7 +32,7 @@ module MiniRails
         unless File.exist?(full_path)
           puts "Warning file '#{full_path}' does not exist"
         end
-        short_path = file_path.gsub(/^.*\/spec\//, '/spec/')
+        short_path = file_path.gsub(/^.*\/spec\//, '/spec/').gsub(/^spec\//, '/spec/')
         # puts "Running test cases for '#{short_path}'"
         require full_path
       end
