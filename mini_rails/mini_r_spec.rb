@@ -10,15 +10,17 @@ require_relative 'mini_r_spec/test_manager'
 
 module MiniRSpec
   def self.describe(title, &block)
-    unit = Base.new
+    unit = Base.instance
     leaf = DescribeLeaf.new(title)
     leaf.instance_exec(&block)
     unit.ast << leaf
-    # unit.show_ast
-    # puts ''
-    # unit.print_cases
-    # puts ''
+    unit
+  end
+
+  def self.run_tests
+    unit = Base.instance
     unit.run_tests
+    unit.clean_ast!
     unit
   end
 end

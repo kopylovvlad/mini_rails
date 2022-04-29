@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+require 'singleton'
+
 module MiniRSpec
   class Base
     attr_accessor :ast
+
+    include ::Singleton
 
     def initialize
       @ast = []
@@ -13,6 +17,10 @@ module MiniRSpec
         puts i.inspect
         puts ''
       end
+    end
+
+    def clean_ast!
+      @ast = []
     end
 
     def print_cases
