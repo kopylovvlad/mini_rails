@@ -1,10 +1,5 @@
 # frozen_string_literal: true
 
-# require 'singleton'
-# require 'date'
-# require 'byebug'
-# require_relative 'mini_active_support.rb'
-
 require_relative 'mini_factory/base'
 require_relative 'mini_factory/builder'
 
