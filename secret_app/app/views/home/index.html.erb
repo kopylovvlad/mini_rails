@@ -1,0 +1,28 @@
+<h1>Secret messaging app</h1>
+
+<p>You are welcome! Here you can create your secret message and share it with colleagues</p>
+
+<h2>Create secret message</h2>
+
+<form action="/secrets" method="post" enctype="application/x-www-form-urlencoded">
+  <div class="">
+    <label for="message">Message</label>
+    <input type="text" id="message" name="message" value="" placeholder="Type here...">
+  </div>
+
+  <div>
+    <label for="with_password">Protect with password</label>
+    <input type="checkbox" id="with_password" name="with_password">
+    <small>Only person who knows pass will see the message</small>
+  </div>
+
+  <div>
+    <label for="with_limit">Protect with limits</label>
+    <input type="checkbox" id="with_limit" name="with_limit">
+    <small>The message will be shown only 3 times</small>
+  </div>
+
+  <div class="mb-3">
+    <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+  </div>
+</form>

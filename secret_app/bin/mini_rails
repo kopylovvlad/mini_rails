@@ -1,0 +1,2 @@
+# bin/bash
+../mini_rails/bin/mini_rails "$@"
