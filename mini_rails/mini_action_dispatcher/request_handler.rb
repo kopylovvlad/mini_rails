@@ -28,7 +28,7 @@ module MiniActionDispatch
         method_token = params[:_method].upcase
       end
 
-      puts "✅ Receive request #{method_token} to path #{path} with params '#{path_params}'" unless ::MiniRails.env.test?
+      puts "✅ Receive request #{method_token} to #{path} with params '#{path_params}'" unless ::MiniRails.env.test?
 
       # Route's placeholder support
       selected_route = MiniActiveRouter::Base.instance.find(method_token, path)
