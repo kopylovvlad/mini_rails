@@ -6,6 +6,4 @@ gem 'mini_rails', :path => '../mini_rails'
 
 group :development do
   gem 'byebug'
-  gem 'solargraph'
-  gem 'rubocop'
 end
