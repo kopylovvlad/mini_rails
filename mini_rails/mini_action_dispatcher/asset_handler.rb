@@ -22,8 +22,8 @@ module MiniActionDispatch
       path_info = request.path_info
       file_path = find_original_file(path_info)
       if file_path.present?
-        puts "✅ Приняли запрос с методом #{request.request_method} на ручку #{path_info}"
-        puts "Его обработает MiniActionDispatch::AssetHandler ..."
+        puts "✅ Receive request #{request.request_method} to '#{path_info}'"
+        puts "Handle is MiniActionDispatch::AssetHandler ..."
         file_context = ::MiniActionView::Asset.new(file_path).render
         return [200, build_headers(path_info), [file_context]]
       end
