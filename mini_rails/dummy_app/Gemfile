@@ -7,6 +7,5 @@ gem 'puma'
 
 group :development do
   gem 'byebug'
-  gem 'solargraph'
   gem 'rubocop'
 end
