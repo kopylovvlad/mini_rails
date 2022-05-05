@@ -9,7 +9,7 @@ Firstly, I wrote the script, it's [here](script.rb). Then I started to improve i
 
 # Structure
 
-Current repo is a mono repository with source code. Folder `mini_rails` contains MVC-framework source code. Code in `todo_list` and `secret_app` folders are examples of application using the MiniRails library.
+Current repo is a mono repository with source code. Folder [mini_rails](https://github.com/kopylovvlad/mini_rails/tree/master/mini_rails) contains MVC-framework source code. Code in [todo_list](https://github.com/kopylovvlad/mini_rails/tree/master/todo_list) and [secret_app](https://github.com/kopylovvlad/mini_rails/tree/master/secret_app) folders are examples of application using the MiniRails library.
 
 # Dependencies
 
@@ -43,12 +43,12 @@ List of features:
   * Scope definition on a model class
   * Data serialisation to JSON
   * Validations `validates_presence_of` and `validates_length_of`
-* MiniActiveRouter - the module to draw routes map. Features: placeholders for params, not found route for 404 page.
-* MiniActiveSupport - a bunch of extensions for different classes. It's similar to ActiveSupport
+* MiniActiveRouter - the module to draw routes map and match route. Features: placeholders for params, not found route for 404 page.
+* MiniActiveSupport - a bunch of extensions for different classes. It's similar to `ActiveSupport`
 * MiniCodeLoader - class for code-reloading. It helps when you are working with CLI console.
 * CLI - with CLI you can run web-server, console, tests, runner and create a new application.
 * MiniRspec - it's `RSpec` from scratch. It supports RSpec's basic structure: `describe`, `context`, `it`. Also has callback `before_each` and function `let!` to define a helper methods. You can write unit and request tests.
-* MiniFactory - it's a copy from `FactoryBot`. Features: factory definition, `sequence` and `trait`.
+* MiniFactory - it's a little copy of `FactoryBot`. Features: factory definition, `sequence` and `trait`.
 
 # Applications
 
