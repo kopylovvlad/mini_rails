@@ -3,9 +3,13 @@ MiniRails - Ruby on MiniRails.
 
 # About
 
-It's my sabbatical project. After catching burnout I decided to take long vacation. Once I watched Maple Ong's talk [Building a Ruby web app using the Ruby Standard Library](https://www.youtube.com/watch?v=lxczDssLYKA) on Euruko 2021. The talk inspired me.
+It's my sabbatical project. After catching burnout I chose to take long vacation. Once I watched Maple Ong's talk [Building a Ruby web app using the Ruby Standard Library](https://www.youtube.com/watch?v=lxczDssLYKA) on Euruko 2021. The talk inspired me.
 
-Firstly, I wrote the same script, it's [here](script.rb). Then I started to improve it and decided to write an MVC-framework like RubyOnRails on plain Ruby. Such a good challenge.
+Firstly, I wrote the script, it's [here](script.rb). Then I started to improve it and decided to write an MVC-framework like RubyOnRails on plain Ruby. Such a good challenge.
+
+# Structure
+
+Current repo is a mono repository with source code. Folder `mini_rails` contains MVC-framework source code. Code in `todo_list` and `secret_app` folders are examples of application using the MiniRails library.
 
 # Dependencies
 
