@@ -5,7 +5,7 @@ MiniRails - Ruby on MiniRails.
 
 It's my sabbatical project. After catching burnout I chose to take long vacation. Once I watched Maple Ong's talk [Building a Ruby web app using the Ruby Standard Library](https://www.youtube.com/watch?v=lxczDssLYKA) on Euruko 2021. The talk inspired me.
 
-Firstly, I wrote the script, it's [here](script.rb). Then I started to improve it and decided to write an MVC-framework like RubyOnRails on plain Ruby. Such a good challenge.
+Firstly I wrote the script, the code is [here](script.rb). Then I started to improve it and decided to write an MVC-framework like RubyOnRails on plain Ruby. Such a good challenge.
 
 # Structure
 
@@ -49,6 +49,7 @@ List of features:
 * CLI - with CLI you can run web-server, console, tests, runner and create a new application.
 * MiniRspec - it's `RSpec` from scratch. It supports RSpec's basic structure: `describe`, `context`, `it`. Also has callback `before_each` and function `let!` to define a helper methods. You can write unit and request tests.
 * MiniFactory - it's a little copy of `FactoryBot`. Features: factory definition, `sequence` and `trait`.
+* Yard documentation
 
 # Applications
 
@@ -98,7 +99,7 @@ bundle install
 ```bash
 # Create new app
 ./mini_rails/bin/mini_rails new <NEW_APP_NAME>
-# Done! Your application in '/Users/vladislavkopylov/Documents/ruby_scripts/maple_ong/ruby_web2/<NEW_APP_NAME>' folder
+# Done! Your application in <NEW_APP_NAME> folder
 
 # Switch to folder
 cd <NEW_APP_NAME>
