@@ -12,7 +12,7 @@ module MiniRails
       if app.respond_to?(command)
         app.public_send(command, argv)
       else
-        raise "Undefined command '#{command}'"
+        raise "ERROR: Undefined command '#{command}'"
       end
     end
 

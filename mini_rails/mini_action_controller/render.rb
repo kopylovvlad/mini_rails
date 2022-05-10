@@ -24,7 +24,7 @@ module MiniActionController
     # @param status [String]
     # @return [MiniActionController::Response]
     def render(view_name, status: MiniActionController::DEFAULT_STATUS)
-      # collect and forward instance variable to MiniActionView::Base
+      # collect and forward instance variables to MiniActionView::Base
       variables_to_pass = collect_variables
       MiniActionView::Base.new(variables_to_pass, entity).render(view_name, status: status)
     end

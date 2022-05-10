@@ -15,8 +15,8 @@ module MiniActionController
 
     module ClassMethods
       # Example of usage:
-      # before_action :initial_value, only: [:index, :show], unless: -> { @foo.nil? }
-      # before_action :initial_value, only: [:index, :show], if: -> { @foo }
+      # before_action :method_name, only: [:index, :show], unless: -> { @foo.nil? }
+      # before_action :method_name, except: [:index, :show], if: -> { @foo }
       # @param method [String, Symbol]
       # @param args [Hash]
       # @option args [Array<String, Symbol>] :only

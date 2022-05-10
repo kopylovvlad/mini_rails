@@ -3,6 +3,7 @@
 require 'singleton'
 
 module MiniRSpec
+  # Singleton class to store test data as AST in @ast variable
   class Base
     attr_accessor :ast
 
@@ -33,7 +34,7 @@ module MiniRSpec
             titles << "#{node.title} #{title}"
           end
         else
-          raise "Undefined node #{node}"
+          raise "ERROR: Undefined node #{node}"
         end
       end
       puts titles
@@ -48,7 +49,7 @@ module MiniRSpec
         elsif node.is_a?(DescribeLeaf)
           node.run_tests
         else
-          raise "Undefined node #{node}"
+          raise "ERROR: Undefined node #{node}"
         end
       end
       TestManager.instance.show_stat

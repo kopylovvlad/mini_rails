@@ -5,9 +5,11 @@ module MiniActiveRecord
     def self.included(base)
       base.extend ClassMethods
 
+      # Define storage to collect info about all defined attributes.
       base.class_attribute :fields
       base.fields = []
 
+      # Define base attributes.
       base.attribute :id, type: String
       base.attribute :created_at, type: DateTime
 
@@ -19,21 +21,17 @@ module MiniActiveRecord
       # @option options [Class, Array<Class>] :type
       # @option options [Object] :default The field's default
       def attribute(field_name, type: String, default: nil)
-        new_field_params = {
-          name: field_name.to_sym,
-          type: type,
-          default: default
-        }
+        new_field_params = { name: field_name.to_sym, type: type, default: default }
         self.fields = fields | [new_field_params]
 
         instance_eval do
-          # Define getter
+          # Define a getter
           define_method(field_name) do
             field_params = fields.find{ |i| i[:name] == field_name.to_sym }
             instance_variable_get("@#{field_name}") || field_params[:default]
           end
 
-          # Define setter
+          # Define a setter
           define_method("#{field_name}=") do |value|
             return false if value.nil?
 

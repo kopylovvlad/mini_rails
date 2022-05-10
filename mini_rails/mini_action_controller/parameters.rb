@@ -13,7 +13,7 @@ module MiniActionController
       if @hash.key?(key)
         @hash[key]
       else
-        raise "param is missing or the value is empty: #{key}"
+        raise "ERROR: param is missing or the value is empty: #{key}"
       end
     end
 

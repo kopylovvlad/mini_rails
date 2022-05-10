@@ -28,10 +28,10 @@ module MiniActionView
       each_serializer = opts[:each_serializer]
       root = opts[:root]
 
-      response_message = if !opts[:serializer].nil?
-                           opts[:serializer].new(@object)
-                         elsif !opts[:each_serializer].nil?
-                           @object.map { |i| opts[:each_serializer].new(i) }
+      response_message = if !serializer.nil?
+                          serializer.new(@object)
+                         elsif !each_serializer.nil?
+                           @object.map { |i| each_serializer.new(i) }
                          else
                            @object
                          end

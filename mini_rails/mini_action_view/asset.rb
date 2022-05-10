@@ -3,7 +3,9 @@
 module MiniActionView
   # TODO: Add cache
   class Asset
+    # It renders text file and ERB files
     # @param original_file_path [String]
+    # @return [String]
     def initialize(original_file_path)
       @original_file_path = original_file_path
       @file_extention = nil
@@ -31,7 +33,7 @@ module MiniActionView
       elsif @file_extention.end_with?('.js')
         ::MiniRails.root.join('app/assets/javascript')
       else
-        raise "Undefined format for file '#{@original_file_path}'"
+        raise "ERROR: Undefined format for file '#{@original_file_path}'"
       end
     end
 
@@ -43,7 +45,7 @@ module MiniActionView
       elsif File.exist?("#{@original_file_path}.erb")
         render("#{@original_file_path}.erb")
       else
-        raise "Can not open file '#{@original_file_path}'"
+        raise "ERROR: Can not open file '#{@original_file_path}'"
       end
     end
   end

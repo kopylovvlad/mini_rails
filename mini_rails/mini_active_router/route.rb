@@ -13,6 +13,10 @@ module MiniActiveRouter
       @to = to
     end
 
+    def present?
+      true
+    end
+
     # @param input_method [String]
     # @param input_path [String]
     def match?(input_method, input_path)

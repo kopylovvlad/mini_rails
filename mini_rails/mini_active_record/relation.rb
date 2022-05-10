@@ -3,7 +3,7 @@
 module MiniActiveRecord
   module Relation
     # @param conditions [Hash<Symbol, Object>] Object could be String, Integer, Array
-    # @return [Array<MiniActiveRecord::Base>]
+    # @return [MiniActiveRecord::Proxy]
     def where(conditions = {})
       init_proxy.where(conditions)
     end
@@ -24,7 +24,7 @@ module MiniActiveRecord
       item
     end
 
-    # @return [Array<MiniActiveRecord::Base>]
+    # @return [MiniActiveRecord::Proxy]
     def all
       where({})
     end

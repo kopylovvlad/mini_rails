@@ -55,17 +55,20 @@ module MiniActiveRouter
       @fallback_route = Route.new(nil, nil, to: to)
     end
 
+    # NOTE: it iterates each route from @map
+    # Returns matched router or @fallback_route
     # @param method [String]
     # @param path [String]
+    # @return [Route]
+    # @raise [StandardError]
     def find(method, path)
-      # Delete / in the end of path
-      selected_route = @map.find{ |route| route.match?(method, path) }
-      if !selected_route.nil?
-        selected_route
-      elsif !@fallback_route.nil?
+      matched_route = @map.find{ |route| route.match?(method, path) }
+      if matched_route.present?
+        matched_route
+      elsif @fallback_route.present?
         @fallback_route
       else
-        raise "Can't find route for #{method}##{path}"
+        raise "ERROR: Can't find route for #{method}##{path}"
       end
     end
 
@@ -76,6 +79,8 @@ module MiniActiveRouter
       @map << Route.new(method, transformed_path, to: to)
     end
 
+    # If a string has placeholders (for example «items/:id»)
+    # It converts string to regexp with groups (for example /items\/(:id[0-9a-zA-Z]*)/)
     def transform_path(path)
       if path.is_a?(Regexp)
         return path
@@ -85,12 +90,12 @@ module MiniActiveRouter
         if placeholders.size == 0
           return path
         else
-          # 2: Replace it to (?<placeholder_name>[0-9a-zA-Z]*)
+          # 2: Replace each placeholder to (?<placeholder_name>[0-9a-zA-Z]*)
           placeholders.each do |placeholder|
             path = path.gsub(placeholder, "(?<#{placeholder}>[0-9a-zA-Z\\-_]*)")
           end
 
-          # 3: Save the route as an regexp
+          # 3: Return the route as an regexp as save it
           return Regexp.new("^#{path}$")
         end
       else

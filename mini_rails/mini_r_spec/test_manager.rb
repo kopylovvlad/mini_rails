@@ -33,11 +33,7 @@ module MiniRSpec
       failure = @info[:failure].size
       all = success + failure
 
-      puts "Finished: #{all} examples, #{failure} failures\n\r"
-
-      return if failure == 0
-
-      puts "Failures:\n\r"
+      puts "Failures:\n\r" if failure > 0
 
       @info[:failure].each_with_index do |arr, index|
         context, exc = arr
@@ -56,6 +52,8 @@ module MiniRSpec
           puts "    # #{str}".red
         end
       end
+
+      puts "\n\rFinished: #{all} examples, #{failure} failures\n\r"
     end
   end
 end

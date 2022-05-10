@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module MiniRSpec
+  # NOTE: `describe` leaf
   class DescribeLeaf
     include Context
     attr_reader :title
@@ -9,7 +10,7 @@ module MiniRSpec
     def initialize(title)
       @title = title
       @children = []
-      @callbacks = [] # Array for before_each callbacls
+      @callbacks = [] # Array for before_each callbacks
       @variables = {} # Hash for let! data
     end
 
@@ -24,7 +25,7 @@ module MiniRSpec
             titles << "#{node.title} #{str}"
           end
         else
-          raise "Undefined node #{node}"
+          raise "ERROR: Undefined node #{node}"
         end
       end
       titles
@@ -54,7 +55,7 @@ module MiniRSpec
         elsif node.is_a?(DescribeLeaf)
           node.run_tests(context, merged_callbacks, merged_variables)
         else
-          raise "Undefined node #{node}"
+          raise "ERROR: Undefined node #{node}"
         end
       end
     end

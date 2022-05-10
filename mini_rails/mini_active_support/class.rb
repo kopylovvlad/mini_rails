@@ -2,7 +2,6 @@
 
 module MiniActiveSupport
   module Class
-    # TODO: rewrite with pure ruby script
     # https://apidock.com/rails/Class/class_attribute
     def class_attribute(*attrs, instance_accessor: true,
       instance_reader: instance_accessor, instance_writer: instance_accessor, instance_predicate: true, default: nil)

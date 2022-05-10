@@ -9,6 +9,7 @@ require_relative 'mini_r_spec/matchers'
 require_relative 'mini_r_spec/test_manager'
 
 module MiniRSpec
+  # Initialize describe leaf and store data in the base object
   def self.describe(title, &block)
     unit = Base.instance
     leaf = DescribeLeaf.new(title)

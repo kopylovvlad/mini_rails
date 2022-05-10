@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module MiniRSpec
+  # NOTE: `it` leaf
   module ItLeaf
     class Base
       include Context
@@ -31,7 +32,7 @@ module MiniRSpec
         # Clear DB before running the test case
         ::MiniActiveRecord::Base.driver.destroy_database!
 
-        # Run all let blocks
+        # Run all let! blocks
         variables.each do |var_name, proc|
           @variables[var_name] = instance_exec(&proc)
         end
@@ -48,7 +49,7 @@ module MiniRSpec
       end
 
       def describe(described_object)
-        raise 'Can not use describe inside "it" block'
+        raise 'ERROR: Can not use describe inside "it" block'
       end
 
       # NOTE: Rewrite aliase
@@ -60,6 +61,7 @@ module MiniRSpec
         if args.present?
           super
         elsif @variables.key?(message)
+          # let! variables support
           @variables[message]
         else
           super

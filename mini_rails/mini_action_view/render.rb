@@ -21,7 +21,7 @@ module MiniActionView
 
     # Example of usage:
     # stylesheet_link_tag "application"
-    # It generates link
+    # It generates a link
     # <link href="/assets/application.css" media="screen" rel="stylesheet" />
     def stylesheet_link_tag(file_name, media: 'screen')
       # Check the file exist
@@ -29,7 +29,7 @@ module MiniActionView
       file_path = MiniRails.root.join("app/assets/stylesheets/#{file_name}.css")
 
       if !File.exist?(file_path) && !File.exist?(erb_file_path)
-        raise "Stylesheet file '#{file_path}' does not exist"
+        raise "ERROR: Stylesheet file '#{file_path}' does not exist"
       end
 
       # Render link
@@ -40,7 +40,7 @@ module MiniActionView
 
     # Example of usage:
     # javascript_include_tag "application"
-    # It generates link
+    # It generates a link
     # <script src="/assets/application.js"></script>
     def javascript_include_tag(file_name)
       <<~STR
@@ -59,7 +59,7 @@ module MiniActionView
       end
       view_path = root_path.join(view_name).to_s
 
-      # assign data from locals as local variables
+      # assign data from locals: as local variables
       local_binding = binding
       locals.each do |key, value|
         local_binding.local_variable_set(key, value)

@@ -36,7 +36,7 @@ module MiniActiveRecord
           klass = validation_namespace.const_get(class_object)
           klass.new(validation, self).call
         else
-          raise "Can not find class #{validation_namespace}::class_object"
+          raise "ERROR: Can not find class #{validation_namespace}::class_object"
         end
       end
       self

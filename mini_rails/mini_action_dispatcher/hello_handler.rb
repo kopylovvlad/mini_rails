@@ -10,9 +10,9 @@ module MiniActionDispatch
     private
 
     def body
-      <<~MGG
+      <<~MSG
         <h1>Hello to Ruby on MiniRails</h1>
-      MGG
+      MSG
     end
   end
 end

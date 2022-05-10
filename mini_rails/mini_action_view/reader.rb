@@ -29,7 +29,7 @@ module MiniActionView
     # @return [String]
     # @raise [StandardError]
     def open_view(view_path)
-      raise "Error: Can't find view #{view_path}" unless File.exist?(view_path)
+      raise "ERROR: Can't find view #{view_path}" unless File.exist?(view_path)
       File.open(view_path).read
     end
   end

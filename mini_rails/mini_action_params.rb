@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class MiniActionParams
+  # Data-object to store and handle request params and http-headers
   class Data
     attr_reader :headers, :params
     def initialize(headers, params)
@@ -17,4 +18,3 @@ class MiniActionParams
     Data.new(headers, params)
   end
 end
-# Base. Action Params layer: START

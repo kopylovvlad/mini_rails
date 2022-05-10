@@ -25,8 +25,10 @@ module MiniActionDispatch
         puts "✅ Receive request #{request.request_method} to '#{path_info}'"
         puts "Handle is MiniActionDispatch::AssetHandler ..."
         file_context = ::MiniActionView::Asset.new(file_path).render
+        # Build rack answer
         return [200, build_headers(path_info), [file_context]]
       end
+      # Return nil in order to pass request to another middleware
       nil
     end
 

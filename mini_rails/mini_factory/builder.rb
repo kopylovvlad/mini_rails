@@ -37,7 +37,7 @@ module MiniFactory
       # 2: Collect all attributes
       all_attributes = (opts.keys + trait_attrs.keys + @attributes.keys).uniq
 
-      # 3: Assign data
+      # 3: Assign data from opts params or fetch it from stored proc
       attrs = all_attributes.reduce({}) do |memo, key|
         memo[key] = if opts.key?(key)
                       opts[key]
@@ -48,6 +48,7 @@ module MiniFactory
                     end
         memo
       end
+      # 4: Assign data to a model instance
       @klass.new(**attrs)
     end
 

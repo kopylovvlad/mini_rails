@@ -87,12 +87,10 @@ module MiniActiveRecord
 
     # DB Driver
     def driver
-      # _driver = ::MiniRails::Application.config.driver
-      # Object.const_get("MiniActiveRecord::#{_driver.to_s.camelize}Driver")
       Base.driver
     end
 
-    # Run driver and wrap raw data to model-class
+    # Run driver and wrap raw data to a model-class
     # @return [Array<ActiveRecord::Base>]
     def execute
       raw_data = driver.where(@where_condition, table_name, @limit)

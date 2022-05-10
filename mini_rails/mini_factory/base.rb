@@ -30,9 +30,11 @@ module MiniFactory
     # @param traits [Array<Symbol>]
     # @param opts [Hash<Symbol, Object>]
     def build_factory(factory_name, traits, opts)
+      # Find MiniFactory::Builder instance
       buidler = @factories[factory_name.to_sym][:buidler]
       number = @factories[factory_name.to_sym][:count] + 1
       @factories[factory_name.to_sym][:count] += 1
+      # Build new object
       buidler.build_object(number, traits, opts)
     end
   end

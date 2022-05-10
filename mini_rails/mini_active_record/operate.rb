@@ -12,6 +12,7 @@ module MiniActiveRecord
       true
     end
 
+    # @return [Boolean]
     def save
       @id ||= SecureRandom.uuid
       @created_at ||= DateTime.now
