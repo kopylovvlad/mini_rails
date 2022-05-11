@@ -5,7 +5,7 @@ MiniRails - Ruby on MiniRails.
 
 It's my sabbatical project. After catching burnout I chose to take long vacation. Once I watched Maple Ong's talk [Building a Ruby web app using the Ruby Standard Library](https://www.youtube.com/watch?v=lxczDssLYKA) on Euruko 2021. The talk inspired me.
 
-Firstly I wrote the script, the code is [here](script.rb). Then I started to improve it and decided to write an MVC-framework like RubyOnRails on plain Ruby. Such a good challenge.
+Firstly I wrote the script, the code is [here](script.rb). Then I started to improve it and decided to write an MVC-framework like RubyOnRails on plain Ruby. Such a good challenge. There is an [article on dev.to](https://dev.to/kopylov_vlad/crafting-mini-rubyonrails-118l) in which I've described the process how I wrote the library and some features.
 
 # Structure
 
